@@ -61,3 +61,7 @@ function love.mousereleased(x, y, button)
 end
 
 
+function objReset()
+    firstShip:reset()
+    planets = {}
+end
