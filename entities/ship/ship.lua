@@ -40,7 +40,9 @@ function ship:update(dt)
     end 
     if love.keyboard.isDown('s') then
         self.speed = math.sqrt(self.dx^2 + self.dy^2) 
+        if self.speed > 0 then 
         self.speed = self.speed - 0.5
+        end
         self.dx = math.cos(self.vector) * self.speed
         self.dy = math.sin(self.vector) * self.speed
     end 
@@ -50,6 +52,7 @@ function ship:update(dt)
         self.dx = math.cos(self.vector) * self.speed
         self.dy = math.sin(self.vector) * self.speed
     end
+    --[[
     if love.keyboard.isDown('left') then 
         self.dx = self.dx - 0.5
     end
@@ -62,6 +65,7 @@ function ship:update(dt)
     if love.keyboard.isDown('down') then 
         self.dy = self.dy + 0.5
     end
+    ]]--
     print(self.speed)
     
     --[[
