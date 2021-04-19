@@ -4,7 +4,7 @@ table.insert(levels, menu:addButton("Level 1", function ()
 gameState = "level1"
 end ))
 table.insert(levels, menu:addButton("Level 2", function ()
-    if levelsBeaten > 0 then 
+    if saveData.levelsBeaten > 0 then 
     gameState = "level2"
     end
     end ))

@@ -1,6 +1,6 @@
 planet = Class{}
 
-G = 6.67e-5
+G = 6.67e-1
 
 function planet:init(x, y, mass, radius, img)
 self.x = x 

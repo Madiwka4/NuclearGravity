@@ -27,7 +27,7 @@ function mainMenu:butt(buttons, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, locationx, locati
             break
         end
         if arg == "beatenGreen" then 
-            if i <= levelsBeaten then 
+            if i <= saveData.levelsBeaten then 
                 color = {0,1,0,1}
             end
         end

@@ -32,11 +32,11 @@ function level1.update(dt)
         
     end 
     if reachedGoal then 
-        if levelsBeaten < 1 then 
-            levelsBeaten = 1
+        if saveData.levelsBeaten < 1 then 
+            saveData.levelsBeaten = 1
         end
-        print("levelsBeaten is " .. levelsBeaten)
-        love.filesystem.write("save", levelsBeaten)
+        print("saveData.levelsBeaten is " .. saveData.levelsBeaten)
+        love.filesystem.write("save", serialize(saveData))
         level1.goBack()
     end
     camera:update(dt)

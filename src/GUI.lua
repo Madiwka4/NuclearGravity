@@ -18,11 +18,12 @@ function GUIDraw(mode)
     --MAIN
 
     --SHIP
-    local shipImage = love.graphics.newImage("entities/ship/smol_red_01.png")
+    local shipImage = love.graphics.newImage("entities/ship/smol_white_01.png")
     GUIButton(shipsleft, shipImage, menuX + 60, menuY+WINDOW_HEIGHT*0.2, function() selectedItem = "ship" end, 1, 1, {1,1,1,1}, 1.57)
     --SHIP
     --PLANET
     GUIButton(planetsleft, planetImage, menuX + 60, menuY+WINDOW_HEIGHT*0.4, function() selectedItem = "planet" end, 0.5, 0.5, {1,1,1,1}, 1.57)
+    
     --PLANET
 
 
@@ -121,13 +122,14 @@ function GUIDraw(mode)
             love.graphics.rectangle("fill", menuX-10, dy-lvlbase.w/2, 10, lvlbase.w)
         end
     end 
+    love.graphics.setColor(1,1,1,1)
         if selectedItem == "planet" and mx < menuX then 
             local shipW = planetImage:getWidth()
             local shipH = planetImage:getHeight()
             love.graphics.draw(planetImage,mx,my,0, 0.3, 0.3, shipW/2, shipH/2)
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
-                table.insert(planets, planet(vmx, vmy, 1000000000, 0.3, planetImage))
+                table.insert(planets, planet(vmx, vmy, 100000000, 0.3, planetImage))
                 planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
                 planetsleft = planetsleft-1
             end
