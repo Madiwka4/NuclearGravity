@@ -1,5 +1,6 @@
 menu = Class{}
 local M = {}
+local menuLoaded = false 
 function menu.update(dt)
     if animationSecsLeft > 0 then 
         animationSecsLeft = animationSecsLeft - dt 
