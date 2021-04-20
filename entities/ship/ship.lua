@@ -66,7 +66,7 @@ function ship:update(dt)
         self.dy = self.dy + 0.5
     end
     ]]--
-    print(self.speed)
+    --print(self.speed)
     
     --[[
     if love.keyboard.isDown('right') then 
@@ -75,8 +75,8 @@ function ship:update(dt)
         self.rotation = self.rotation - 10
     end]]--
 
-    print("rotation:" .. self.rotation)
-    print("speed:" .. self.dx .. " " .. self.dy)
+    --print("rotation:" .. self.rotation)
+    --print("speed:" .. self.dx .. " " .. self.dy)
    
     if self.dx < 0 then 
         self.vector = self.vector - 3.14159
@@ -89,12 +89,12 @@ function ship:draw()
 
     -- Draw the `self.canvas` to screen
     love.graphics.setColor(unpack(self.color))
-    print("DAW" .. camera.x)
+    --print("DAW" .. camera.x)
     love.graphics.draw(self.image, self.x, self.y, self.vector, 1, 1, self.width/2, self.height/2)
     for i in ipairs(self.path) do 
         if i > 1 then 
             love.graphics.setColor(0.9,0.9,0.9,1)
-            print("DOING".. i)
+            --print("DOING".. i)
             love.graphics.line(self.path[i].x, self.path[i].y, self.path[i-1].x, self.path[i-1].y)
         end
     end

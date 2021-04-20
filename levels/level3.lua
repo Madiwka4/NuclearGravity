@@ -1,7 +1,7 @@
-level1 = Class{}
+level3 = Class{}
 local levelLoaded = false
 local M = {}
-function level1.update(dt)
+function level3.update(dt)
     if not levelLoaded then 
         shipsleft = 1
         local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
@@ -14,44 +14,46 @@ function level1.update(dt)
         shipIsHit = false
         guimenu = mainMenu()
         reachedGoal = false
-        lvlbase = base(900, 200)
+        lvlbase = base(900, 300)
         levelLoaded = true
         table.insert(playbutts, menu:addButton("Return to setup", function()
             gameStatus = "setup"
-            level1.reset()
+            level3.reset()
         end ))
         table.insert(guibutts, menu:addButton("Release brake!", function ()
             if shipsleft == 0 then 
-            selectedItem = "none"
-            gameStatus = "play"
-            end 
+                selectedItem = "none"
+                gameStatus = "play"
+                end 
         end 
         ))
         table.insert(guibutts, menu:addButton("To menu", function ()
-            level1.goBack()
+            level3.goBack()
         end)) 
-        table.insert(planets, planet(700, 200, 50, 0.3, planetImage, "nodelete"))
+        table.insert(planets, planet(900, 400, 50, 0.3, planetImage, "nodelete"))
+        table.insert(planets, planet(700, 300, 50, 0.3, planetImage, "nodelete"))
+        table.insert(planets, planet(900, 200, 50, 0.3, planetImage, "nodelete"))
         
     end 
     if reachedGoal then 
-        if saveData.levelsBeaten < 1 then 
-            saveData.levelsBeaten = 1
+        if saveData.levelsBeaten < 3 then 
+            saveData.levelsBeaten = 3
         end
         --print("saveData.levelsBeaten is " .. saveData.levelsBeaten)
         love.filesystem.write("save", serialize(saveData))
-        level1.goBack()
+        level3.goBack()
     end
     camera:update(dt)
     if lvlbase ~= nil then 
-    lvlbase:update(dt)
-    end
+        lvlbase:update(dt)
+        end 
     --print(camera.x .. " " .. camera.y)
     for i, explosion in ipairs(explosions) do 
         explosion:update(dt)
         if explosion.killed then 
             table.remove(explosions, i)
             gameStatus = "setup"
-            level1.reset()
+            level3.reset()
         end
     end
     if gameStatus == "play" then
@@ -71,18 +73,18 @@ function level1.update(dt)
 else 
     camera:follow(VCAM.x, VCAM.y)
 end
-    level1.GUIControl()
+    level3.GUIControl()
     
     
 end 
 
-function level1.draw()
+function level3.draw()
     love.graphics.setColor(1,1,1,1)
     camera:attach()
     firstShip:draw()
     if lvlbase ~= nil then 
-    lvlbase:draw()
-    end 
+        lvlbase:draw()
+        end 
     for i in ipairs(planets) do 
         planets[i]:draw(dt)
     end
@@ -107,30 +109,30 @@ function level1.draw()
     
     
 end 
-function level1.goBack()
-    level1.reset()
-    
+function level3.goBack()
+    level3.reset()
+    lvlbase = nil
     gameStatus = "setup"
     firstShip.path = {}
     levelLoaded = false
     for k in pairs(planets) do
         planets[k] = nil
     end
-    lvlbase = nil
     gameState = "selectlv"
 end 
-function level1.reset()
+function level3.reset()
     firstShip:reset()
     for k in pairs(planets) do
+        if planets[k].deletable then 
         planets[k] = nil
+        end 
     end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
-    table.insert(planets, planet(700, 200, 50, 0.3, planetImage))
     shipsleft = 1
     shipIsHit = false
     planetsleft = 3
 end 
-function level1.GUIControl()
+function level3.GUIControl()
     if (love.keyboard.isDown('a') and VCAM.x > WINDOW_WIDTH/2) then 
         VCAM.x = VCAM.x - 10
     end
@@ -138,5 +140,5 @@ function level1.GUIControl()
         VCAM.x = VCAM.x + 10
     end
 end 
-return level1
+return level3
 

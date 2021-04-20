@@ -24,9 +24,9 @@ function love.load()
     testwalls = love.filesystem.load("save")
     if testwalls ~= nil then
         saveData = love.filesystem.load("save")()
-        print("Save file found")
+        --print("Save file found")
     else
-        print("No save file found!")
+        --print("No save file found!")
     end 
     tick.framerate = 60
     camera = Camera()

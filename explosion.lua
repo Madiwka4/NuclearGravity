@@ -7,13 +7,13 @@ function explosion:init(x, y, v, color)
     self.v = v
     self.range = 0  
     self.killed = false 
-    print(self.i)
+    --print(self.i)
 end
 
 function explosion:update(dt)
     self.range = self.range + dt * 24 
     if self.range * self.v > WINDOW_WIDTH * 2 then 
-        print("killing myself with range" .. self.range)
+        --print("killing myself with range" .. self.range)
         self.killed = true
     end
 end
@@ -21,7 +21,7 @@ end
 
 
 function explosion:render()
-    print("rendering myself" .. self.x .. " " .. self.y .. " " .. self.range .. " " .. self.v)
+    --print("rendering myself" .. self.x .. " " .. self.y .. " " .. self.range .. " " .. self.v)
     love.graphics.setColor(unpack(self.color))
     love.graphics.circle("fill", self.x, self.y, self.range * self.v, 100)
 end

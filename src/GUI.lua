@@ -104,7 +104,7 @@ function GUIDraw(mode)
     end 
     if lvlbase ~= nil then 
         local dx, dy = camera:toCameraCoords(lvlbase.x, lvlbase.y)
-        print("YESYEYSYSYADSYADYASD")
+        --print("YESYEYSYSYADSYADYASD")
         if VCAM.x - WINDOW_WIDTH/2+250 > lvlbase.x then 
             love.graphics.setColor(0,1,0,1)
             love.graphics.rectangle("fill", 0, dy-lvlbase.w/2, 10, lvlbase.w)
@@ -141,10 +141,10 @@ function GUIDraw(mode)
             local hot = (vmx > firstShip.x-firstShip.height/2 and vmx < firstShip.x+firstShip.height and vmy > firstShip.y-firstShip.width/2 and vmy < firstShip.y - firstShip.width/2 + firstShip.width)
             if hot then 
                 firstShip.color = {1,0,0,1}
-                print("hot")
+                --print("hot")
             else 
                 firstShip.color = {1,1,1,1}
-                print(mx .. " " .. my .. " " .. firstShip.x .. " " .. firstShip.y .. " " .. firstShip.width .. firstShip.height)
+                --print(mx .. " " .. my .. " " .. firstShip.x .. " " .. firstShip.y .. " " .. firstShip.width .. firstShip.height)
             end
             local pressed = love.keyboard.mouseisReleased
             if location == "android" then 
@@ -162,7 +162,7 @@ function GUIDraw(mode)
                     local hot = (vmx > planets[j].x-planets[j].w*0.3/2 and vmx < planets[j].x+planets[j].w*0.3 and vmy > planets[j].y-planets[j].w*0.3/2 and vmy < planets[j].y + planets[j].w*0.3)
                     if hot then 
                         planets[j].color = {1,0,0,1}
-                        print("hot")
+                        --print("hot")
                     else 
                         planets[j].color = {1,1,1,1}
                         --print(mx .. " " .. my .. " " .. firstShip.x .. " " .. firstShip.y .. " " .. firstShip.width .. firstShip.height)

@@ -32,7 +32,7 @@ function practice.update(dt)
     end
     camera:update(dt)
     
-    print(camera.x .. " " .. camera.y)
+    --print(camera.x .. " " .. camera.y)
     for i, explosion in ipairs(explosions) do 
         explosion:update(dt)
         if explosion.killed then 
@@ -43,7 +43,7 @@ function practice.update(dt)
     end
     if gameStatus == "play" then
         camera.x, camera.y = firstShip.x - firstShip.height*4, firstShip.y- firstShip.width
-        print(camera.x .. firstShip.x)
+        --print(camera.x .. firstShip.x)
         if shipIsHit then 
             if #explosions == 0 then 
                 table.insert(explosions, explosion(firstShip.x, firstShip.y, 100, {1,1,1,1}))

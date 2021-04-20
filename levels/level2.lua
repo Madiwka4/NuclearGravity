@@ -37,7 +37,7 @@ function level2.update(dt)
         if saveData.levelsBeaten < 2 then 
             saveData.levelsBeaten = 2
         end
-        print("saveData.levelsBeaten is " .. saveData.levelsBeaten)
+        --print("saveData.levelsBeaten is " .. saveData.levelsBeaten)
         love.filesystem.write("save", serialize(saveData))
         level2.goBack()
     end

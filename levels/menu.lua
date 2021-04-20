@@ -22,7 +22,7 @@ function menu.update(dt)
         firstShip.x = -100
         firstShip.speed = 10
         firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
-        print("ship is hit")
+        --print("ship is hit")
     end
 end 
 

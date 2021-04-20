@@ -12,7 +12,13 @@ table.insert(levels, menu:addButton("Level 2", function ()
     gameState = "level2"
     end
     end ))
-
+    table.insert(levels, menu:addButton("Level 3", function ()
+        if saveData.levelsBeaten > 1 then 
+            menuLoaded = false
+            objReset()
+        gameState = "level3"
+        end
+        end ))
 
 
 
@@ -38,7 +44,7 @@ function selectlv.update(dt)
         firstShip.x = -100
         firstShip.speed = 10
         firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
-        print("ship is hit")
+        --print("ship is hit")
     end
 end 
 

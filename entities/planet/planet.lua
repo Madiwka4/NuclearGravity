@@ -22,7 +22,7 @@ function planet:update(dt)
     local distanceToShip = math.sqrt((firstShip.x - self.x)^2 + (firstShip.y - self.y)^2)
     
     local gravitationalAttraction = G*self.mass/(distanceToShip^2)
-    print((firstShip.x - self.x) .. " " .. (firstShip.y - self.y))
+    --print((firstShip.x - self.x) .. " " .. (firstShip.y - self.y))
     self.angle = math.atan( (firstShip.y - self.y)/ (firstShip.x - self.x))
     if self.x < firstShip.x then 
         self.angle = self.angle - 3.14159
