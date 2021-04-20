@@ -3,20 +3,23 @@ levels = {}
 table.insert(levels, menu:addButton("Level 1", function ()
 menuLoaded = false
 objReset()
-gameState = "level1"
+gameState = "levelgeneral"
+currentLevel = 1
 end ))
 table.insert(levels, menu:addButton("Level 2", function ()
     if saveData.levelsBeaten > 0 then 
         menuLoaded = false
         objReset()
-    gameState = "level2"
+        gameState = "levelgeneral"
+        currentLevel = 2
     end
     end ))
     table.insert(levels, menu:addButton("Level 3", function ()
         if saveData.levelsBeaten > 1 then 
             menuLoaded = false
             objReset()
-        gameState = "level3"
+            gameState = "levelgeneral"
+            currentLevel = 3
         end
         end ))
 

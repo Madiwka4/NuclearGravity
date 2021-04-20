@@ -1,7 +1,7 @@
-level2 = Class{}
+level4 = Class{}
 local levelLoaded = false
 local M = {}
-function level2.load()
+function level4.load()
     shipsleft = 1
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     planetsleft = 3
@@ -13,11 +13,11 @@ function level2.load()
     shipIsHit = false
     guimenu = mainMenu()
     reachedGoal = false
-    lvlbase = base(1800, 500)
+    lvlbase = base(400, 300)
     levelLoaded = true
     table.insert(playbutts, menu:addButton("Return to setup", function()
         gameStatus = "setup"
-        level2.reset()
+        levelgeneral.reset()
     end ))
     table.insert(guibutts, menu:addButton("Release brake!", function ()
         if shipsleft == 0 then 
@@ -27,22 +27,26 @@ function level2.load()
     end 
     ))
     table.insert(guibutts, menu:addButton("To menu", function ()
-        level2.goBack()
+        levelgeneral.goBack()
     end)) 
-    table.insert(planets, planet(700, 500, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(900, 400, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(700, 300, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(900, 200, 50, 0.3, planetImage, "nodelete"))
 end 
-function level2.reset()
+
+function level4.reset()
     firstShip:reset()
     for k in pairs(planets) do
+        if planets[k].deletable then 
         planets[k] = nil
+        end 
     end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
-    table.insert(planets, planet(700, 500, 50, 0.3, planetImage))
     shipsleft = 1
     shipIsHit = false
     planetsleft = 3
 end 
-function level2.GUIControl()
+function level4.GUIControl()
     if (love.keyboard.isDown('a') and VCAM.x > WINDOW_WIDTH/2) then 
         VCAM.x = VCAM.x - 10
     end
@@ -50,5 +54,5 @@ function level2.GUIControl()
         VCAM.x = VCAM.x + 10
     end
 end 
-return level2
+return level4
 

@@ -12,6 +12,8 @@ WINDOW_HEIGHT = 720
 OFFSET_X = 0
 OFFSET_Y = 0
 
+currentLevel = 0
+
 saveData = {
     levelsBeaten = 0
 }
