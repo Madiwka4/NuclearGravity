@@ -1,6 +1,8 @@
 function buttonClutter()
     table.insert(buttons, menu:addButton("Practice", 
     function() 
+        menuLoaded = false
+        objReset()
         gameState = "practice"
     end))
     table.insert(buttons, menu:addButton("Levels", 

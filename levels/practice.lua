@@ -18,8 +18,10 @@ function practice.update(dt)
             practice.reset()
         end ))
         table.insert(guibutts, menu:addButton("Release brake!", function ()
-            selectedItem = "none"
-            gameStatus = "play"
+            if shipsleft == 0 then 
+                selectedItem = "none"
+                gameStatus = "play"
+                end 
         end 
         ))
         table.insert(guibutts, menu:addButton("To menu", function ()

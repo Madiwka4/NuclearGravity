@@ -2,7 +2,7 @@ planet = Class{}
 
 G = 6.67e-1
 
-function planet:init(x, y, mass, radius, img)
+function planet:init(x, y, mass, radius, img, arg)
 self.x = x 
 self.y = y 
 self.mass = mass 
@@ -11,6 +11,11 @@ self.w = img:getWidth()
 self.image = img
 self.angle = 0
 self.color = {1,1,1,1}
+if arg == "nodelete" then 
+    self.deletable = false 
+else 
+    self.deletable = true 
+end
 end 
 
 function planet:update(dt)

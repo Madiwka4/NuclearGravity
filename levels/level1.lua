@@ -21,14 +21,16 @@ function level1.update(dt)
             level1.reset()
         end ))
         table.insert(guibutts, menu:addButton("Release brake!", function ()
+            if shipsleft == 0 then 
             selectedItem = "none"
             gameStatus = "play"
+            end 
         end 
         ))
         table.insert(guibutts, menu:addButton("To menu", function ()
             level1.goBack()
         end)) 
-        table.insert(planets, planet(700, 200, 50, 0.3, planetImage))
+        table.insert(planets, planet(700, 200, 50, 0.3, planetImage, "nodelete"))
         
     end 
     if reachedGoal then 
@@ -40,7 +42,9 @@ function level1.update(dt)
         level1.goBack()
     end
     camera:update(dt)
+    if lvlbase ~= nil then 
     lvlbase:update(dt)
+    end
     --print(camera.x .. " " .. camera.y)
     for i, explosion in ipairs(explosions) do 
         explosion:update(dt)
@@ -76,7 +80,9 @@ function level1.draw()
     love.graphics.setColor(1,1,1,1)
     camera:attach()
     firstShip:draw()
+    if lvlbase ~= nil then 
     lvlbase:draw()
+    end 
     for i in ipairs(planets) do 
         planets[i]:draw(dt)
     end
@@ -103,12 +109,14 @@ function level1.draw()
 end 
 function level1.goBack()
     level1.reset()
+    
     gameStatus = "setup"
     firstShip.path = {}
     levelLoaded = false
     for k in pairs(planets) do
         planets[k] = nil
     end
+    lvlbase = nil
     gameState = "selectlv"
 end 
 function level1.reset()

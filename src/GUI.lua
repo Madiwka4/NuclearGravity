@@ -158,23 +158,25 @@ function GUIDraw(mode)
 
 
             for j in ipairs(planets) do 
-                local hot = (vmx > planets[j].x-planets[j].w*0.3/2 and vmx < planets[j].x+planets[j].w*0.3 and vmy > planets[j].y-planets[j].w*0.3/2 and vmy < planets[j].y + planets[j].w*0.3)
-                if hot then 
-                    planets[j].color = {1,0,0,1}
-                    print("hot")
-                else 
-                    planets[j].color = {1,1,1,1}
-                    --print(mx .. " " .. my .. " " .. firstShip.x .. " " .. firstShip.y .. " " .. firstShip.width .. firstShip.height)
-                end
-                local pressed = love.keyboard.mouseisReleased
-                if location == "android" then 
-                    pressed = love.mouse.isDown(1)
-                end
-                if pressed and hot then
-                    love.keyboard.mouseisReleased = false 
-                    table.remove(planets, j)
-                    planetsleft = planetsleft + 1
-                    break
+                if planets[j].deletable then 
+                    local hot = (vmx > planets[j].x-planets[j].w*0.3/2 and vmx < planets[j].x+planets[j].w*0.3 and vmy > planets[j].y-planets[j].w*0.3/2 and vmy < planets[j].y + planets[j].w*0.3)
+                    if hot then 
+                        planets[j].color = {1,0,0,1}
+                        print("hot")
+                    else 
+                        planets[j].color = {1,1,1,1}
+                        --print(mx .. " " .. my .. " " .. firstShip.x .. " " .. firstShip.y .. " " .. firstShip.width .. firstShip.height)
+                    end
+                    local pressed = love.keyboard.mouseisReleased
+                    if location == "android" then 
+                        pressed = love.mouse.isDown(1)
+                    end
+                    if pressed and hot then
+                        love.keyboard.mouseisReleased = false 
+                        table.remove(planets, j)
+                        planetsleft = planetsleft + 1
+                        break
+                    end
                 end
             end
         end
@@ -187,9 +189,7 @@ function GUIDraw(mode)
     --REMOVE TOOL
 
     --START BUTTON
-    if shipsleft == 0 then 
         guimenu:butt(guibutts, WINDOW_WIDTH, WINDOW_HEIGHT, menuX + 200, WINDOW_HEIGHT-100, 40, WINDOW_WIDTH/3.7)
-    end 
     --START BUTTON
     love.window.setTitle(selectedItem)
 end 
