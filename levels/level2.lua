@@ -5,6 +5,8 @@ function level2.load()
     shipsleft = 1
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     planetsleft = 3
+    thrusterMax = 100
+    firstShip.fuel = 100
     gameStatus = "setup"
     playbutts = {}
     guibutts = {}
@@ -36,6 +38,7 @@ function level2.reset()
     for k in pairs(planets) do
         planets[k] = nil
     end
+    firstShip.fuel = 100
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     table.insert(planets, planet(700, 500, 50, 0.3, planetImage))
     shipsleft = 1
@@ -50,5 +53,8 @@ function level2.GUIControl()
         VCAM.x = VCAM.x + 10
     end
 end 
+function level2.goBack()
+    levelgeneral.goBack()
+end
 return level2
 

@@ -1,19 +1,29 @@
 levelgeneral = Class{}
 local levelLoaded = false
 local M = {}
+local thrusterMax = 0
+local animationComplete = false
+local frame = 0
 function levelgeneral.update(dt)
     if not levelLoaded then 
         level = require("levels/level" .. currentLevel)
         level.load()
+        frame = 0
+        animationComplete = false
         levelLoaded = true
     end 
     if reachedGoal then 
+        if love.keyboard.isDown('return') then 
+            animationComplete  = true 
+        end
         if saveData.levelsBeaten < currentLevel then 
             saveData.levelsBeaten = currentLevel
         end
         --print("saveData.levelsBeaten is " .. saveData.levelsBeaten)
+        if animationComplete then 
         love.filesystem.write("save", serialize(saveData))
         levelgeneral.goBack()
+        end 
     end
     camera:update(dt)
     if lvlbase ~= nil then 
@@ -47,13 +57,13 @@ else
 end
     levelgeneral.GUIControl()
     
-    
 end 
 
 function levelgeneral.draw()
     love.graphics.setColor(1,1,1,1)
     camera:attach()
-    firstShip:draw()
+
+    
     if lvlbase ~= nil then 
         lvlbase:draw()
         end 
@@ -67,14 +77,37 @@ function levelgeneral.draw()
             --print("exploding")
         end
     end
+    if reachedGoal then 
+        love.graphics.clear(0,0,0,1)
+        love.graphics.setColor(30/255, 30/255, 30/255, 1)
+        if frame < WINDOW_WIDTH then 
+        love.graphics.circle("fill", firstShip.x, firstShip.y, WINDOW_WIDTH - frame)
+        end 
+        frame = frame + 20
+    end 
+        firstShip:draw()
     camera:detach()
     
     camera:draw()
-   
-    if gameStatus == "setup" then 
+    if reachedGoal then 
+        love.graphics.setColor(1,1,1,1-1/frame)
+        love.graphics.setFont(smallfont)
+        love.graphics.printf("Press Enter to continue",0, 600, WINDOW_WIDTH, "center")
+    end
+    if gameStatus == "setup" and not reachedGoal then 
     GUIDraw("left")
     elseif gameStatus == "play" then 
+        if not reachedGoal then 
+        love.graphics.printf("Thrusters: ", 0, WINDOW_HEIGHT-50, 600, "center")
+        local m = smallfont:getWidth("Thrusters: ")
+        local n = smallfont:getHeight("Thrusters: ")
+        love.graphics.setColor(1,0,0,1)
+        love.graphics.rectangle("fill",m + 100, WINDOW_HEIGHT-50, thrusterMax/2, n)
+        love.graphics.setColor(0,1,0,1)
+        love.graphics.rectangle("fill",m + 100, WINDOW_HEIGHT-50, firstShip.fuel/2, n)
+        love.graphics.setColor(1,1,1,1)
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
+        end 
     end
     
     

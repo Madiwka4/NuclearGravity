@@ -53,7 +53,14 @@ function GUIDraw(mode)
         if selectedItem == "ship" and mx < menuX then 
             local shipW = shipImage:getWidth()
             local shipH = shipImage:getHeight()
+            if VCAM.x > WINDOW_WIDTH/2-1 then 
             love.graphics.draw(shipImage,10,my, 1.5708, 1, 1, shipW/2, shipH/2)
+            elseif VCAM.x > -WINDOW_WIDTH/2+(WINDOW_WIDTH-(menuX-firstShip.height/2)) then
+                local timex, timey = camera:toCameraCoords(250, 0) 
+            love.graphics.draw(shipImage,timex,my, 1.5708, 1, 1, shipW/2, shipH/2)
+            else 
+            love.graphics.draw(shipImage,menuX-firstShip.height/2,my, 1.5708, 1, 1, shipW/2, shipH/2)
+            end
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
                 firstShip.x = 250

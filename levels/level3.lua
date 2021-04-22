@@ -7,6 +7,8 @@ function level3.load()
     planetsleft = 3
     gameStatus = "setup"
     playbutts = {}
+    thrusterMax = 150
+    firstShip.fuel = 150
     guibutts = {}
     VCAM.x, VCAM.y = WINDOW_WIDTH/2, WINDOW_HEIGHT/2
     explosions = {}
@@ -43,6 +45,7 @@ function level3.reset()
     end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     shipsleft = 1
+    firstShip.fuel = 150
     shipIsHit = false
     planetsleft = 3
 end 
@@ -54,5 +57,8 @@ function level3.GUIControl()
         VCAM.x = VCAM.x + 10
     end
 end 
+function level3.goBack()
+    levelgeneral.goBack()
+end
 return level3
 

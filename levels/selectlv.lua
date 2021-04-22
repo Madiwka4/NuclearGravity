@@ -22,6 +22,14 @@ table.insert(levels, menu:addButton("Level 2", function ()
             currentLevel = 3
         end
         end ))
+        table.insert(levels, menu:addButton("Level 4", function ()
+            if saveData.levelsBeaten > 2 then 
+                menuLoaded = false
+                objReset()
+                gameState = "levelgeneral"
+                currentLevel = 4
+            end
+            end ))
 
 
 
