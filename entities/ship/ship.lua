@@ -8,6 +8,7 @@ self.ox = x
 self.oy = y
 self.dy = 0
 self.dx = 5
+self.speed = 1
 self.image = love.graphics.newImage(image)
 self.width = self.image:getWidth()
 self.height = self.image:getHeight()
@@ -34,8 +35,8 @@ function ship:update(dt)
         if love.timer.getFPS() < 20 then 
             self.path = {}
         end
-    self.x = self.x + self.dx/2
-    self.y = self.y + self.dy/2
+    self.x = self.x + self.dx*self.speed/2
+    self.y = self.y + self.dy*self.speed/2
     if self.dx ~= 0 then 
     self.vector = math.atan( self.dy/ self.dx)
     end 
@@ -49,10 +50,8 @@ function ship:update(dt)
     end ]]--
     if love.keyboard.isDown('w') and self.fuel > 0 then 
         self.fuel = self.fuel - 0.5
-        self.speed = math.sqrt(self.dx^2 + self.dy^2)
-        self.speed = self.speed + 0.5
-        self.dx = math.cos(self.vector) * self.speed
-        self.dy = math.sin(self.vector) * self.speed
+        self.speed = self.speed + 0.05
+
     end
     --[[
     if love.keyboard.isDown('left') then 
@@ -112,7 +111,7 @@ function ship:reset()
     self.rotation = 1.57
     self.canvas = love.graphics.newCanvas(WINDOW_WIDTH, WINDOW_HEIGHT)
     self.vector = 1.56
-    self.speed = 0
+    self.speed = 1
     self.path = {}
     self.dottimer = 0.5
 end 

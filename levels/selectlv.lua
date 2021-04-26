@@ -40,7 +40,6 @@ local M = {}
 function selectlv.update(dt)
     if not menuLoaded then 
         firstShip.x = -100
-        firstShip.speed = 10
         firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
         menuLoaded = true
         table.insert(planets, planet(love.math.random(100, WINDOW_WIDTH-100), love.math.random(100, WINDOW_HEIGHT-100), 90000000, 0.3, love.graphics.newImage("entities/planet/planet.png")))
@@ -53,7 +52,6 @@ function selectlv.update(dt)
         shipIsHit = false
         firstShip:reset()
         firstShip.x = -100
-        firstShip.speed = 10
         firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
         --print("ship is hit")
     end

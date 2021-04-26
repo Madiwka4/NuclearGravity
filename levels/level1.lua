@@ -3,8 +3,8 @@ local levelLoaded = false
 local M = {}
 function level1.load()
     shipsleft = 1
-    thrusterMax = 50
-    firstShip.fuel = 50
+    thrusterMax = 25
+    firstShip.fuel = 25
         local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
         planetsleft = 3
         gameStatus = "setup"
@@ -31,7 +31,7 @@ function level1.load()
         table.insert(guibutts, menu:addButton("To menu", function ()
             level.goBack()
         end)) 
-    --    table.insert(planets, planet(700, 200, 50, 0.3, planetImage, "nodelete"))
+        table.insert(planets, planet(700, 200, 50, 0.3, planetImage, "nodelete"))
 end 
 function level1.reset()
     firstShip:reset()
@@ -42,7 +42,7 @@ function level1.reset()
     table.insert(planets, planet(700, 200, 50, 0.3, planetImage))
     shipsleft = 1
     shipIsHit = false
-    firstShip.fuel = 50
+    firstShip.fuel = 25
     planetsleft = 3
 end 
 function level1.GUIControl()

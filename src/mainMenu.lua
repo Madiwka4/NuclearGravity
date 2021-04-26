@@ -24,6 +24,7 @@ function mainMenu:butt(buttons, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, locationx, locati
         if button.now and hot == i then
             love.keyboard.mouseisReleased = false 
             button.fn()
+            hot = false
             break
         end
         if arg == "beatenGreen" then 

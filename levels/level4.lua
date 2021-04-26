@@ -8,8 +8,8 @@ function level4.load()
     gameStatus = "setup"
     playbutts = {}
     guibutts = {}
-    thrusterMax = 200
-    firstShip.fuel = 200
+    thrusterMax = 100
+    firstShip.fuel = 100
     VCAM.x, VCAM.y = WINDOW_WIDTH/2, WINDOW_HEIGHT/2
     explosions = {}
     shipIsHit = false
@@ -44,7 +44,7 @@ function level4.reset()
     end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     shipsleft = 1
-    firstShip.fuel = 200
+    firstShip.fuel = 100
     shipIsHit = false
     planetsleft = 3
 end 

@@ -98,13 +98,13 @@ function levelgeneral.draw()
     GUIDraw("left")
     elseif gameStatus == "play" then 
         if not reachedGoal then 
-        love.graphics.printf("Thrusters: ", 0, WINDOW_HEIGHT-50, 600, "center")
+        love.graphics.printf("Thrusters: ", 0, WINDOW_HEIGHT-100, 300, "center")
         local m = smallfont:getWidth("Thrusters: ")
         local n = smallfont:getHeight("Thrusters: ")
         love.graphics.setColor(1,0,0,1)
-        love.graphics.rectangle("fill",m + 100, WINDOW_HEIGHT-50, thrusterMax/2, n)
+        love.graphics.rectangle("fill",0, WINDOW_HEIGHT-50, thrusterMax/2, n)
         love.graphics.setColor(0,1,0,1)
-        love.graphics.rectangle("fill",m + 100, WINDOW_HEIGHT-50, firstShip.fuel/2, n)
+        love.graphics.rectangle("fill",0, WINDOW_HEIGHT-50, firstShip.fuel/2, n)
         love.graphics.setColor(1,1,1,1)
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
         end 

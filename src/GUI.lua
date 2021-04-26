@@ -223,6 +223,7 @@ function GUIButton(num, shipImage, x, y, fn, sx, sy, color, r)
     if pressed and hot then
         love.keyboard.mouseisReleased = false 
         fn()
+        hot = false
     end
     love.graphics.draw(shipImage,x,y, r, sx, sy, shipW/2, shipH/2)
     love.graphics.print("x" .. num,x+10,y)
