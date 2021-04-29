@@ -107,6 +107,7 @@ function levelgeneral.draw()
         love.graphics.rectangle("fill",0, WINDOW_HEIGHT-50, firstShip.fuel/2, n)
         love.graphics.setColor(1,1,1,1)
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
+        love.keyboard.mouseisReleased = false
         end 
     end
     

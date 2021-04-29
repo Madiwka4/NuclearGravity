@@ -8,8 +8,16 @@ function buttonClutter()
     table.insert(buttons, menu:addButton("Levels", 
     function() 
         gameState = "selectlv"
+    end))
+    --[[table.insert(buttons, menu:addButton("Toggle Fullscreen", 
+    function() 
+        myscreen:toggle(WINDOW_HEIGHT, WINDOW_WIDTH)
+                DIFFERENCE_X = myscreen.c
+                DIFFERENCE_Y = myscreen.d
+                OFFSET_X = myscreen.e 
+                OFFSET_Y = myscreen.f 
     end
-))
+))]]-- 
 end 
 local t=0
 function explode(x, y)

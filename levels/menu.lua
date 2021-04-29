@@ -36,6 +36,7 @@ function menu.draw(dt)
         love.graphics.setFont(titlefont)
     love.graphics.printf("NuclearGravity", 0, 20, WINDOW_WIDTH, "center")
     menu:butt(buttons, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 40, WINDOW_WIDTH/3)
+    love.keyboard.mouseisReleased = false
     end 
 end 
 

@@ -63,6 +63,7 @@ function selectlv.draw(dt)
         planets[i]:draw(dt)
     end
     menu:butt(levels, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 40, WINDOW_WIDTH/3, "beatenGreen")
+    love.keyboard.mouseisReleased = false
 end 
 
 return selectlv

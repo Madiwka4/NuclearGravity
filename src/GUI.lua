@@ -30,6 +30,8 @@ function GUIDraw(mode)
     --PLACING
     local mx, my = love.mouse.getPosition()
     local vmx, vmy = camera:getMousePosition()
+    local vmx = vmx * DIFFERENCE_X
+    local vmy = vmy * DIFFERENCE_Y
     local mx = mx * DIFFERENCE_X
     local my = my * DIFFERENCE_Y
     if mode == "anywhere" then 
@@ -197,6 +199,7 @@ function GUIDraw(mode)
 
     --START BUTTON
         guimenu:butt(guibutts, WINDOW_WIDTH, WINDOW_HEIGHT, menuX + 200, WINDOW_HEIGHT-100, 40, WINDOW_WIDTH/3.7)
+        love.keyboard.mouseisReleased = false 
     --START BUTTON
     love.window.setTitle(selectedItem)
 end 
@@ -209,6 +212,8 @@ function GUIButton(num, shipImage, x, y, fn, sx, sy, color, r)
 
     local mx, my = love.mouse.getPosition()
     local vmx, vmy = camera:getMousePosition()
+    local vmx = vmx * DIFFERENCE_X
+    local vmy = vmy * DIFFERENCE_Y
     local mx = mx * DIFFERENCE_X
     local my = my * DIFFERENCE_Y
     local hot = (mx > x-shipW/2*sx and mx < x-shipW/2*sx + shipW*sx and my > y-shipH/2*sy and my < y -shipH/2*sy + shipH*sy)

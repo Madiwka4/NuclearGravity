@@ -28,10 +28,10 @@ function fullScreener:toggle(vh, vw)
         simpleScale.updateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, {fullscreen = true})
         local newWidth = love.graphics.getWidth()
         local newHeight = love.graphics.getHeight()
-        self.c = VIRTUAL_WIDTH / newWidth
-        self.d = VIRTUAL_HEIGHT / newHeight
-        self.e = math.fmod(newWidth * self.d, VIRTUAL_WIDTH) / 2
-        self.f = math.fmod(newHeight * self.d, VIRTUAL_HEIGHT) / 2
+        self.c = WINDOW_WIDTH / newWidth
+        self.d = WINDOW_HEIGHT / newHeight
+        self.e = math.fmod(newWidth * self.d, WINDOW_WIDTH) / 2
+        self.f = math.fmod(newHeight * self.d, WINDOW_HEIGHT) / 2
         self.b = 1
 
     end

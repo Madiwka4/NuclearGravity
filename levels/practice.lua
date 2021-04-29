@@ -83,6 +83,7 @@ function practice.draw()
     GUIDraw("anywhere")
     elseif gameStatus == "play" then 
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
+        love.keyboard.mouseisReleased = false
     end
     
     

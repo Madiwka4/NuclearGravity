@@ -39,6 +39,7 @@ function love.load()
     VCAM = VCAM(WINDOW_WIDTH/2, WINDOW_HEIGHT/2)
     smallfont = love.graphics.newFont("font.ttf", 25)
     titlefont = love.graphics.newFont("font.ttf", 50)
+    myscreen = fullScreener(RESOLUTION_SET, isFullscreen, DIFFERENCE_X, DIFFERENCE_Y, OFFSET_X, OFFSET_Y)
     --table.insert(planets, planet(100, WINDOW_HEIGHT/2-100, 1010000000, 1))
     buttonClutter()
     --planet2 = planet(1000, 300, 1000000000, 20)
@@ -46,7 +47,7 @@ end
 
 function love.update(dt)
     stateUpdate(dt)
-
+love.window.setTitle("Nuclear Gravity")
 end 
 
 function love.draw()
