@@ -33,6 +33,16 @@ function level1.load()
         end)) 
         table.insert(planets, planet(700, 200, 50, 0.3, planetImage, "nodelete"))
 end 
+function level1.hint()
+    GUIDraw("left")
+    love.graphics.setFont(tinyfont)
+    if (VCAM.x > WINDOW_WIDTH/2) then 
+        love.graphics.print("←[A]",10,50)
+    end 
+    if (VCAM.x < WINDOW_WIDTH*2) then 
+        love.graphics.print("[D]→",100,50)
+    end 
+end 
 function level1.reset()
     firstShip:reset()
     for k in pairs(planets) do
@@ -49,7 +59,7 @@ function level1.GUIControl()
     if (love.keyboard.isDown('a') and VCAM.x > WINDOW_WIDTH/2) then 
         VCAM.x = VCAM.x - 10
     end
-    if (love.keyboard.isDown('d'))  then
+    if (love.keyboard.isDown('d') and VCAM.x < WINDOW_WIDTH*2)  then
         VCAM.x = VCAM.x + 10
     end
 end 

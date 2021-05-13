@@ -30,7 +30,14 @@ table.insert(levels, menu:addButton("Level 2", function ()
                 currentLevel = 4
             end
             end ))
-
+            table.insert(levels, menu:addButton("Level 5", function ()
+                if saveData.levelsBeaten > 3 then 
+                    menuLoaded = false
+                    objReset()
+                    gameState = "levelgeneral"
+                    currentLevel = 5
+                end
+                end ))
 
 
 table.insert(levels, menu:addButton("Go Back", function ()
@@ -40,9 +47,13 @@ local M = {}
 function selectlv.update(dt)
     if not menuLoaded then 
         firstShip.x = -100
-        firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
         menuLoaded = true
         table.insert(planets, planet(love.math.random(100, WINDOW_WIDTH-100), love.math.random(100, WINDOW_HEIGHT-100), 90000000, 0.3, love.graphics.newImage("entities/planet/planet.png")))
+        if (planets[1].y < WINDOW_HEIGHT/2) then 
+            firstShip.y =  love.math.random(WINDOW_HEIGHT/2, WINDOW_HEIGHT)
+        else 
+            firstShip.y =  love.math.random(0, WINDOW_HEIGHT/2)
+        end
     end
     for i in ipairs(planets) do 
         planets[i]:update(dt)
@@ -52,7 +63,11 @@ function selectlv.update(dt)
         shipIsHit = false
         firstShip:reset()
         firstShip.x = -100
-        firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
+        if (planets[1].y < WINDOW_HEIGHT/2) then 
+            firstShip.y =  love.math.random(WINDOW_HEIGHT/2, WINDOW_HEIGHT)
+        else 
+            firstShip.y =  love.math.random(0, WINDOW_HEIGHT/2)
+        end
         --print("ship is hit")
     end
 end 

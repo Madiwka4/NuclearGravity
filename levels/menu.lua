@@ -4,9 +4,14 @@ menuLoaded = false
 function menu.update(dt)
     if not menuLoaded then 
         firstShip.x = -100
-        firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
         menuLoaded = true
+        planets = {}
         table.insert(planets, planet(love.math.random(100, WINDOW_WIDTH-100), love.math.random(100, WINDOW_HEIGHT-100), 90000000, 0.3, love.graphics.newImage("entities/planet/planet.png")))
+        if (planets[1].y < WINDOW_HEIGHT/2) then 
+            firstShip.y =  love.math.random(WINDOW_HEIGHT/2, WINDOW_HEIGHT)
+        else 
+            firstShip.y =  love.math.random(0, WINDOW_HEIGHT/2)
+        end
     end
     for i in ipairs(planets) do 
         planets[i]:update(dt)
@@ -19,7 +24,11 @@ function menu.update(dt)
         shipIsHit = false
         firstShip:reset()
         firstShip.x = -100
-        firstShip.y =  love.math.random(0, WINDOW_HEIGHT)
+        if (planets[1].y < WINDOW_HEIGHT/2) then 
+            firstShip.y =  love.math.random(WINDOW_HEIGHT/2, WINDOW_HEIGHT)
+        else 
+            firstShip.y =  love.math.random(0, WINDOW_HEIGHT/2)
+        end
         --print("ship is hit")
     end
 end 

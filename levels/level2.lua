@@ -45,6 +45,16 @@ function level2.reset()
     shipIsHit = false
     planetsleft = 3
 end 
+function level2.hint()
+    GUIDraw("left")
+    love.graphics.setFont(tinyfont)
+    if (VCAM.x > WINDOW_WIDTH/2) then 
+    love.graphics.print("←[A]",10,50)
+    end 
+    if (VCAM.x < WINDOW_WIDTH*2) then 
+    love.graphics.print("[D]→",100,50)
+    end 
+end 
 function level2.GUIControl()
     if (love.keyboard.isDown('a') and VCAM.x > WINDOW_WIDTH/2) then 
         VCAM.x = VCAM.x - 10

@@ -19,17 +19,22 @@ self.path = {}
 self.dottimer = 0.5
 self.fuel = 0
 end 
-function ship:newPathDot(dotx, doty)
+function ship:newPathDot(dotx, doty, color)
     return {
         x = dotx, 
-        y = doty
+        y = doty,
+        color = color
     }
 end
 function ship:update(dt)
     if not shipIsHit then 
         self.dottimer = self.dottimer - dt
         if self.dottimer < 0 then 
-        table.insert(self.path, self:newPathDot(self.x, self.y))
+            if (love.keyboard.isDown('w') and self.fuel > 0) then 
+                table.insert(self.path, self:newPathDot(self.x, self.y, 1))
+            else 
+                table.insert(self.path, self:newPathDot(self.x, self.y, 2))
+            end
         self.dottimer = 0.2 
         end
         if love.timer.getFPS() < 20 then 
@@ -94,7 +99,11 @@ function ship:draw()
     love.graphics.draw(self.image, self.x, self.y, self.vector, 1, 1, self.width/2, self.height/2)
     for i in ipairs(self.path) do 
         if i > 1 then 
+            
             love.graphics.setColor(0.9,0.9,0.9,1)
+            if (self.path[i].color < 2) then 
+                love.graphics.setColor(0.9,0.4,0.4,1)
+            end 
             --print("DOING".. i)
             love.graphics.line(self.path[i].x, self.path[i].y, self.path[i-1].x, self.path[i-1].y)
         end

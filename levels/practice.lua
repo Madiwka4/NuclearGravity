@@ -119,4 +119,12 @@ function practice.GUIControl()
         VCAM.x = VCAM.x + 10
     end
 end 
+function practice.hint()
+    love.graphics.setFont(tinyfont)
+    love.graphics.print("↑[W]",50,10)
+    love.graphics.print("↓[S]",50,100)
+    love.graphics.print("←[A]",10,50)
+    love.graphics.print("→[D]",100,50)
+
+end 
 return practice
