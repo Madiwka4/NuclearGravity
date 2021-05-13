@@ -30,7 +30,7 @@ function ship:update(dt)
     if not shipIsHit then 
         self.dottimer = self.dottimer - dt
         if self.dottimer < 0 then 
-            if (love.keyboard.isDown('w') and self.fuel > 0) then 
+            if (love.keyboard.isDown('w') and self.fuel > 0 and gameState == "levelgeneral") then 
                 table.insert(self.path, self:newPathDot(self.x, self.y, 1))
             else 
                 table.insert(self.path, self:newPathDot(self.x, self.y, 2))
@@ -53,7 +53,7 @@ function ship:update(dt)
         self.dx = math.cos(self.vector) * self.speed
         self.dy = math.sin(self.vector) * self.speed
     end ]]--
-    if love.keyboard.isDown('w') and self.fuel > 0 then 
+    if love.keyboard.isDown('w') and self.fuel > 0 and gameState == "levelgeneral" then 
         self.fuel = self.fuel - 0.5
         self.speed = self.speed + 0.05
 

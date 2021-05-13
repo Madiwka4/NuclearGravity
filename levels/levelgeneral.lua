@@ -4,6 +4,7 @@ local M = {}
 local thrusterMax = 0
 local animationComplete = false
 local frame = 0
+asteroidImage = love.graphics.newImage("entities/planet/asteroid.png")
 function levelgeneral.update(dt)
     if not levelLoaded then 
         level = require("levels/level" .. currentLevel)
@@ -81,6 +82,7 @@ function levelgeneral.draw()
         love.graphics.clear(0,0,0,1)
         love.graphics.setColor(30/255, 30/255, 30/255, 1)
         if frame < WINDOW_WIDTH then 
+        sounds["finish"]:play()
         love.graphics.circle("fill", firstShip.x, firstShip.y, WINDOW_WIDTH - frame)
         end 
         frame = frame + 20

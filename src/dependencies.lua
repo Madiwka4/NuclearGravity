@@ -11,6 +11,7 @@ require 'src/GUI'
 require 'stateMachine'
 require 'entities/base/base'
 require 'entities/camera/VCAM'
+require 'src/musicController'
 tick = require 'src/tick'
 utf8 = require("utf8")
 serialize = require 'src/ser'

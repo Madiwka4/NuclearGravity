@@ -15,7 +15,7 @@ function mainMenu:butt(buttons, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, locationx, locati
         local my = my * DIFFERENCE_Y
         local hot = (mx > ev_bx and mx < ev_bx + ev_button_width and my > ev_by and my < ev_by + ev_BUTTON_HEIGHT) and i
         if (hot == i) then 
-            color = {10, 10, 0, 255}
+            color = {10/255, 10/255, 10/255, 255}
         end
         button.now = love.keyboard.mouseisReleased
         if location == "android" then 
@@ -24,6 +24,7 @@ function mainMenu:butt(buttons, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, locationx, locati
         if button.now and hot == i then
             love.keyboard.mouseisReleased = false 
             button.fn()
+            musicController("click")
             hot = false
             break
         end
@@ -36,7 +37,10 @@ function mainMenu:butt(buttons, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, locationx, locati
         love.graphics.rectangle("fill", ev_bx,ev_by, ev_button_width, ev_BUTTON_HEIGHT)
         love.graphics.setColor(0, 0, 0, 255)
         local textW = smallfont:getWidth(button.text)
-        local textH = smallfont:getHeight(button.text)   
+        local textH = smallfont:getHeight(button.text)
+        if hot == i then 
+            love.graphics.setColor(1,1,1,255)
+        end   
         love.graphics.print(button.text, smallfont, ev_bx + ev_button_width*0.5 - textW*0.5, ev_by+textH*0.5)
         love.graphics.setColor(255, 255, 255, 255)
         cursor_y = cursor_y + (ev_BUTTON_HEIGHT + margin)

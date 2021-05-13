@@ -4,7 +4,7 @@ local M = {}
 function level5.load()
     shipsleft = 1
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
-    planetsleft = 5
+    planetsleft = 10
     gameStatus = "setup"
     playbutts = {}
     guibutts = {}
@@ -31,9 +31,9 @@ function level5.load()
     table.insert(guibutts, menu:addButton("To menu", function ()
         levelgeneral.goBack()
     end)) 
-    table.insert(planets, planet(0, 2000, 50, 0.3, planetImage, "nodelete"))
-    table.insert(planets, planet(100, 2000, 50, 0.3, planetImage, "nodelete"))
-    table.insert(planets, planet(50, 1700, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(0, 2000, 50, 0.3, asteroidImage, "nodelete"))
+    table.insert(planets, planet(100, 2000, 50, 0.3, asteroidImage, "nodelete"))
+    table.insert(planets, planet(50, 1700, 50, 0.3, asteroidImage, "nodelete"))
 end 
 
 function level5.reset()
@@ -47,7 +47,7 @@ function level5.reset()
     shipsleft = 1
     firstShip.fuel = 100
     shipIsHit = false
-    planetsleft = 5
+    planetsleft = 10
 end 
 function level5.GUIControl()
     if (love.keyboard.isDown('w') and VCAM.y > -WINDOW_WIDTH) then 

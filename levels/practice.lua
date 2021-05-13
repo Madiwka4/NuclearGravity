@@ -1,6 +1,7 @@
 practice = Class{}
 local levelLoaded = false
 local M = {}
+local currenctScore = 0
 function practice.update(dt)
     if not levelLoaded then 
         shipsleft = 1
@@ -9,7 +10,10 @@ function practice.update(dt)
         playbutts = {}
         guibutts = {}
         XCAM = 0
+        currentScore = 0
+        thrusterMax = 0
         YCAM = 0
+        firstShip.fuel = 0
         explosions = {}
         shipIsHit = false
         guimenu = mainMenu()
@@ -31,7 +35,6 @@ function practice.update(dt)
         levelLoaded = true 
     end
     camera:update(dt)
-    
     --print(camera.x .. " " .. camera.y)
     for i, explosion in ipairs(explosions) do 
         explosion:update(dt)
@@ -54,6 +57,7 @@ function practice.update(dt)
     for i in ipairs(planets) do 
         planets[i]:update(dt)
     end
+    currentScore = currentScore + math.sqrt(firstShip.dx^2 + firstShip.dy^2) 
 else 
     camera:follow(VCAM.x, VCAM.y)
 end
@@ -81,7 +85,10 @@ function practice.draw()
    
     if gameStatus == "setup" then 
     GUIDraw("anywhere")
+    practice.hint()
     elseif gameStatus == "play" then 
+        local textW = tinyfont:getWidth("Score: " .. math.floor(currentScore/100))
+        love.graphics.print("Score: " .. math.floor(currentScore/100), WINDOW_WIDTH/2-textW/2, 10)
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
         love.keyboard.mouseisReleased = false
     end
@@ -102,8 +109,13 @@ function practice.reset()
         planets[k] = nil
     end
     shipsleft = 1
+    if currentScore > saveData.score then 
+        saveData.score = currentScore
+    end
+    currentScore = 0
     shipIsHit = false
     planetsleft = 10
+    firstShip.fuel = 99999
 end 
 function practice.GUIControl()
     if (love.keyboard.isDown('w')) then 
@@ -125,6 +137,8 @@ function practice.hint()
     love.graphics.print("↓[S]",50,100)
     love.graphics.print("←[A]",10,50)
     love.graphics.print("→[D]",100,50)
+    
+    
 
 end 
 return practice

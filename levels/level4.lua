@@ -31,8 +31,8 @@ function level4.load()
     table.insert(guibutts, menu:addButton("To menu", function ()
         levelgeneral.goBack()
     end)) 
-    table.insert(planets, planet(-200, 400, 50, 0.3, planetImage, "nodelete"))
-    table.insert(planets, planet(-200, 200, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(-200, 400, 50, 0.3, asteroidImage, "nodelete"))
+    table.insert(planets, planet(-200, 200, 50, 0.3, asteroidImage, "nodelete"))
 end 
 
 function level4.reset()

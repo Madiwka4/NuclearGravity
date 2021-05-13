@@ -2,10 +2,13 @@ planet = Class{}
 
 G = 6.67e-1
 
+
 function planet:init(x, y, mass, radius, img, arg)
 self.x = x 
 self.y = y 
 self.mass = mass 
+self.attractionX = 0
+self.attractionY = 0
 self.r = radius 
 self.w = img:getWidth()
 self.image = img
@@ -19,6 +22,7 @@ end
 end 
 
 function planet:update(dt)
+    if not reachedGoal then 
     local distanceToShip = math.sqrt((firstShip.x - self.x)^2 + (firstShip.y - self.y)^2)
     
     local gravitationalAttraction = G*self.mass/(distanceToShip^2)
@@ -33,9 +37,15 @@ function planet:update(dt)
     love.window.setTitle(self.attractionX)
     firstShip.dx = firstShip.dx + self.attractionX
     firstShip.dy = firstShip.dy + self.attractionY
+    if distanceToShip < 100 then 
+        sounds["close"]:play()
+    end
     if distanceToShip < self.w/4 then 
         shipIsHit = true
+        sounds["close"]:stop()
+        sounds["boom"]:play()
     end
+end
 end 
 
 function planet:draw()

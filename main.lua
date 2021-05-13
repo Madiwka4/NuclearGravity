@@ -15,7 +15,8 @@ OFFSET_Y = 0
 currentLevel = 0
 
 saveData = {
-    levelsBeaten = 0
+    levelsBeaten = 0,
+    score = 0
 }
 
 planets = {}

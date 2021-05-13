@@ -45,6 +45,7 @@ function GUIDraw(mode)
                 love.keyboard.mouseisReleased = false 
                 firstShip.x = vmx 
                 firstShip.y = vmy
+                sounds["appear"]:play()
                 shipsleft = shipsleft - 1
             end
             if shipsleft == 0 then 

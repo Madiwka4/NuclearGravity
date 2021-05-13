@@ -31,7 +31,7 @@ function level1.load()
         table.insert(guibutts, menu:addButton("To menu", function ()
             level.goBack()
         end)) 
-        table.insert(planets, planet(700, 200, 50, 0.3, planetImage, "nodelete"))
+        table.insert(planets, planet(700, 200, 50, 0.3, asteroidImage, "nodelete"))
 end 
 function level1.hint()
     GUIDraw("left")
@@ -49,7 +49,7 @@ function level1.reset()
         planets[k] = nil
     end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
-    table.insert(planets, planet(700, 200, 50, 0.3, planetImage))
+    table.insert(planets, planet(700, 200, 50, 0.3, asteroidImage))
     shipsleft = 1
     shipIsHit = false
     firstShip.fuel = 25

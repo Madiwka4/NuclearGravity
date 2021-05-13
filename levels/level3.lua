@@ -31,9 +31,9 @@ function level3.load()
     table.insert(guibutts, menu:addButton("To menu", function ()
         levelgeneral.goBack()
     end)) 
-    table.insert(planets, planet(900, 400, 50, 0.3, planetImage, "nodelete"))
-    table.insert(planets, planet(700, 300, 50, 0.3, planetImage, "nodelete"))
-    table.insert(planets, planet(900, 200, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(900, 400, 50, 0.3, asteroidImage, "nodelete"))
+    table.insert(planets, planet(700, 300, 50, 0.3, asteroidImage, "nodelete"))
+    table.insert(planets, planet(900, 200, 50, 0.3, asteroidImage, "nodelete"))
 end 
 function level3.hint()
     GUIDraw("left")
@@ -57,6 +57,7 @@ function level3.reset()
     firstShip.fuel = 75
     shipIsHit = false
     planetsleft = 3
+    
 end 
 function level3.GUIControl()
     if (love.keyboard.isDown('a') and VCAM.x > WINDOW_WIDTH/2) then 
