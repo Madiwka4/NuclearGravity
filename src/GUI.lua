@@ -29,11 +29,12 @@ function GUIDraw(mode)
 
     --PLACING
     local mx, my = love.mouse.getPosition()
-    local vmx, vmy = camera:getMousePosition()
-    local vmx = vmx * DIFFERENCE_X
-    local vmy = vmy * DIFFERENCE_Y
+    
+   -- local vmx = vmx * DIFFERENCE_X
+   -- local vmy = vmy * DIFFERENCE_Y
     local mx = mx * DIFFERENCE_X
     local my = my * DIFFERENCE_Y
+    local vmx, vmy = camera:toWorldCoords(mx, my)
     if mode == "anywhere" then 
         love.graphics.setColor(1,1,1,0.5)
         if selectedItem == "ship" and mx < menuX then 
@@ -67,6 +68,29 @@ function GUIDraw(mode)
                 love.keyboard.mouseisReleased = false 
                 firstShip.x = 250
                 firstShip.y = vmy
+                shipsleft = shipsleft - 1
+            end
+            if shipsleft == 0 then 
+                selectedItem = "none"
+            end
+        end
+    elseif mode == "up" then 
+        love.graphics.setColor(1,1,1,0.5)
+        if selectedItem == "ship" and mx < menuX then 
+            local shipW = shipImage:getWidth()
+            local shipH = shipImage:getHeight()
+            if VCAM.y > WINDOW_HEIGHT/2-1 then 
+            love.graphics.draw(shipImage,mx,10, 1.5708, 1, 1, shipW/2, shipH/2)
+            elseif VCAM.y > -WINDOW_HEIGHT/2+(WINDOW_HEIGHT-(WINDOW_HEIGHT-firstShip.width/2)) then
+                local timex, timey = camera:toCameraCoords(0, 100) 
+            love.graphics.draw(shipImage,mx,timey, 1.5708, 1, 1, shipW/2, shipH/2)
+            else 
+            love.graphics.draw(shipImage,mx,WINDOW_HEIGHT-firstShip.height/2, 1.5708, 1, 1, shipW/2, shipH/2)
+            end
+            if love.keyboard.mouseisReleased  then 
+                love.keyboard.mouseisReleased = false 
+                firstShip.x = vmx
+                firstShip.y = 100
                 shipsleft = shipsleft - 1
             end
             if shipsleft == 0 then 

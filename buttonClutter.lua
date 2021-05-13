@@ -9,7 +9,7 @@ function buttonClutter()
     function() 
         gameState = "selectlv"
     end))
-    --[[table.insert(buttons, menu:addButton("Toggle Fullscreen", 
+    table.insert(buttons, menu:addButton("Toggle Fullscreen", 
     function() 
         myscreen:toggle(WINDOW_HEIGHT, WINDOW_WIDTH)
                 DIFFERENCE_X = myscreen.c
@@ -17,7 +17,12 @@ function buttonClutter()
                 OFFSET_X = myscreen.e 
                 OFFSET_Y = myscreen.f 
     end
-))]]-- 
+))
+table.insert(buttons, menu:addButton("Quit", 
+function() 
+    love.event.quit()
+end
+))
 end 
 local t=0
 function explode(x, y)

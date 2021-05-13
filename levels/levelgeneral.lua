@@ -95,12 +95,12 @@ function levelgeneral.draw()
         love.graphics.printf("Press Enter to continue",0, 600, WINDOW_WIDTH, "center")
     end
     if gameStatus == "setup" and not reachedGoal then 
-    GUIDraw("left")
+    level.hint()
     elseif gameStatus == "play" then 
         if not reachedGoal then 
-        love.graphics.printf("Thrusters: ", 0, WINDOW_HEIGHT-100, 300, "center")
-        local m = smallfont:getWidth("Thrusters: ")
-        local n = smallfont:getHeight("Thrusters: ")
+        love.graphics.printf("[W] Thrusters: ", 0, WINDOW_HEIGHT-100, 300, "center")
+        local m = smallfont:getWidth("[W] Thrusters: ")
+        local n = smallfont:getHeight("[W] Thrusters: ")
         love.graphics.setColor(1,0,0,1)
         love.graphics.rectangle("fill",0, WINDOW_HEIGHT-50, thrusterMax/2, n)
         love.graphics.setColor(0,1,0,1)

@@ -1,21 +1,21 @@
-level3 = Class{}
+level5 = Class{}
 local levelLoaded = false
 local M = {}
-function level3.load()
+function level5.load()
     shipsleft = 1
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
-    planetsleft = 3
+    planetsleft = 5
     gameStatus = "setup"
     playbutts = {}
-    thrusterMax = 75
-    firstShip.fuel = 75
     guibutts = {}
-    VCAM.x, VCAM.y = WINDOW_WIDTH/2, WINDOW_HEIGHT/2
+    thrusterMax = 100
+    firstShip.fuel = 100
+    VCAM.x, VCAM.y = 0, WINDOW_HEIGHT/2
     explosions = {}
     shipIsHit = false
     guimenu = mainMenu()
     reachedGoal = false
-    lvlbase = base(900, 300)
+    lvlbase = base(50, 2000)
     levelLoaded = true
     table.insert(playbutts, menu:addButton("Return to setup", function()
         gameStatus = "setup"
@@ -31,21 +31,12 @@ function level3.load()
     table.insert(guibutts, menu:addButton("To menu", function ()
         levelgeneral.goBack()
     end)) 
-    table.insert(planets, planet(900, 400, 50, 0.3, planetImage, "nodelete"))
-    table.insert(planets, planet(700, 300, 50, 0.3, planetImage, "nodelete"))
-    table.insert(planets, planet(900, 200, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(0, 2000, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(100, 2000, 50, 0.3, planetImage, "nodelete"))
+    table.insert(planets, planet(50, 1700, 50, 0.3, planetImage, "nodelete"))
 end 
-function level3.hint()
-    GUIDraw("left")
-    love.graphics.setFont(tinyfont)
-    if (VCAM.x > WINDOW_WIDTH/2) then 
-        love.graphics.print("←[A]",10,50)
-    end 
-    if (VCAM.x < WINDOW_WIDTH*2) then 
-        love.graphics.print("[D]→",100,50)
-    end 
-end 
-function level3.reset()
+
+function level5.reset()
     firstShip:reset()
     for k in pairs(planets) do
         if planets[k].deletable then 
@@ -54,20 +45,30 @@ function level3.reset()
     end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     shipsleft = 1
-    firstShip.fuel = 75
+    firstShip.fuel = 100
     shipIsHit = false
-    planetsleft = 3
+    planetsleft = 5
 end 
-function level3.GUIControl()
-    if (love.keyboard.isDown('a') and VCAM.x > WINDOW_WIDTH/2) then 
-        VCAM.x = VCAM.x - 10
+function level5.GUIControl()
+    if (love.keyboard.isDown('w') and VCAM.y > -WINDOW_WIDTH) then 
+        VCAM.y = VCAM.y - 10
     end
-    if (love.keyboard.isDown('d'))  then
-        VCAM.x = VCAM.x + 10
+    if (love.keyboard.isDown('s') and VCAM.y < WINDOW_WIDTH*2)  then
+        VCAM.y = VCAM.y + 10
     end
+end
+function level5.hint()
+    GUIDraw("up")
+    love.graphics.setFont(tinyfont)
+    if (VCAM.y > -WINDOW_WIDTH) then 
+    love.graphics.print("↑[W]",50,10)
+    end 
+    if (VCAM.y < WINDOW_WIDTH*2) then 
+    love.graphics.print("↓[D]",50,100)
+    end 
 end 
-function level3.goBack()
+function level5.goBack()
     levelgeneral.goBack()
 end
-return level3
+return level5
 
