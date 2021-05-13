@@ -201,7 +201,6 @@ function GUIDraw(mode)
         guimenu:butt(guibutts, WINDOW_WIDTH, WINDOW_HEIGHT, menuX + 200, WINDOW_HEIGHT-100, 40, WINDOW_WIDTH/3.7)
         love.keyboard.mouseisReleased = false 
     --START BUTTON
-    love.window.setTitle(selectedItem)
 end 
 
 
