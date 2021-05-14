@@ -61,10 +61,18 @@ function level5.hint()
     GUIDraw("up")
     love.graphics.setFont(tinyfont)
     if (VCAM.y > -WINDOW_WIDTH) then 
+        if love.keyboard.isDown('w') then
+            love.graphics.setColor(1,0,0,1) 
+        end
     love.graphics.print("↑[W]",50,10)
+    love.graphics.setColor(1,1,1,1) 
     end 
     if (VCAM.y < WINDOW_WIDTH*2) then 
-    love.graphics.print("↓[D]",50,100)
+        if love.keyboard.isDown('s') then
+            love.graphics.setColor(1,0,0,1) 
+        end
+    love.graphics.print("↓[S]",50,100)
+    love.graphics.setColor(1,1,1,1) 
     end 
 end 
 function level5.goBack()

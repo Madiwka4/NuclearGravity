@@ -18,6 +18,7 @@ self.color = {1,1,1,1}
 self.path = {}
 self.dottimer = 0.5
 self.fuel = 0
+self.destX = x
 end 
 function ship:newPathDot(dotx, doty, color)
     return {
@@ -57,6 +58,17 @@ function ship:update(dt)
         self.fuel = self.fuel - 0.5
         self.speed = self.speed + 0.05
 
+    end
+    local tag = false 
+    for i in ipairs(planets) do 
+        local distanceToShip = math.sqrt((firstShip.x - planets[i].x)^2 + (firstShip.y - planets[i].y)^2)
+        if distanceToShip < 200 and not shipIsHit and gameStatus == "play" then 
+            sounds["close"]:play()
+            tag = true 
+        end
+    end
+    if not tag or shipIsHit then 
+        sounds["close"]:stop()
     end
     --[[
     if love.keyboard.isDown('left') then 
@@ -121,6 +133,7 @@ function ship:reset()
     self.canvas = love.graphics.newCanvas(WINDOW_WIDTH, WINDOW_HEIGHT)
     self.vector = 1.56
     self.speed = 1
+    self.destX = self.x
     self.path = {}
     self.dottimer = 0.5
 end 

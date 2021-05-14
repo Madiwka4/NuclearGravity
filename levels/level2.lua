@@ -48,11 +48,20 @@ end
 function level2.hint()
     GUIDraw("left")
     love.graphics.setFont(tinyfont)
+    
     if (VCAM.x > WINDOW_WIDTH/2) then 
+        if love.keyboard.isDown('a') then
+            love.graphics.setColor(1,0,0,1) 
+        end
     love.graphics.print("←[A]",10,50)
+    love.graphics.setColor(1,1,1,1) 
     end 
     if (VCAM.x < WINDOW_WIDTH*2) then 
+        if love.keyboard.isDown('a') then
+            love.graphics.setColor(1,0,0,1) 
+        end
     love.graphics.print("[D]→",100,50)
+    love.graphics.setColor(1,1,1,1) 
     end 
 end 
 function level2.GUIControl()

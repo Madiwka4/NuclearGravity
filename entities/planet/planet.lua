@@ -24,7 +24,7 @@ end
 function planet:update(dt)
     if not reachedGoal then 
     local distanceToShip = math.sqrt((firstShip.x - self.x)^2 + (firstShip.y - self.y)^2)
-    
+    --print("update")
     local gravitationalAttraction = G*self.mass/(distanceToShip^2)
     --print((firstShip.x - self.x) .. " " .. (firstShip.y - self.y))
     self.angle = math.atan( (firstShip.y - self.y)/ (firstShip.x - self.x))
@@ -37,9 +37,6 @@ function planet:update(dt)
     love.window.setTitle(self.attractionX)
     firstShip.dx = firstShip.dx + self.attractionX
     firstShip.dy = firstShip.dy + self.attractionY
-    if distanceToShip < 100 then 
-        sounds["close"]:play()
-    end
     if distanceToShip < self.w/4 then 
         shipIsHit = true
         sounds["close"]:stop()

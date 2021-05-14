@@ -40,8 +40,10 @@ function practice.update(dt)
         explosion:update(dt)
         if explosion.killed then 
             table.remove(explosions, i)
+            if shipIsHit then 
             gameStatus = "setup"
             practice.reset()
+            end 
         end
     end
     if gameStatus == "play" then
@@ -49,6 +51,7 @@ function practice.update(dt)
         --print(camera.x .. firstShip.x)
         if shipIsHit then 
             if #explosions == 0 then 
+                
                 table.insert(explosions, explosion(firstShip.x, firstShip.y, 100, {1,1,1,1}))
             end 
             
@@ -85,9 +88,13 @@ function practice.draw()
    
     if gameStatus == "setup" then 
     GUIDraw("anywhere")
+    love.graphics.setFont(tinyfont)
+    local textW = tinyfont:getWidth("Top score: " .. math.floor(saveData.score/100))
+    love.graphics.print("Top score: " .. math.floor(saveData.score/100), WINDOW_WIDTH/2-textW/2, 10)
     practice.hint()
     elseif gameStatus == "play" then 
         local textW = tinyfont:getWidth("Score: " .. math.floor(currentScore/100))
+        love.graphics.setFont(tinyfont)
         love.graphics.print("Score: " .. math.floor(currentScore/100), WINDOW_WIDTH/2-textW/2, 10)
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
         love.keyboard.mouseisReleased = false
@@ -110,7 +117,9 @@ function practice.reset()
     end
     shipsleft = 1
     if currentScore > saveData.score then 
+        
         saveData.score = currentScore
+        love.filesystem.write("save", serialize(saveData))
     end
     currentScore = 0
     shipIsHit = false
@@ -133,10 +142,26 @@ function practice.GUIControl()
 end 
 function practice.hint()
     love.graphics.setFont(tinyfont)
-    love.graphics.print("↑[W]",50,10)
-    love.graphics.print("↓[S]",50,100)
+    if love.keyboard.isDown('w') then
+        love.graphics.setColor(1,0,0,1) 
+    end
+    love.graphics.print("↑[W]",80,10)
+    love.graphics.setColor(1,1,1,1) 
+    if love.keyboard.isDown('s') then
+        love.graphics.setColor(1,0,0,1) 
+    end
+    love.graphics.print("↓[S]",80,100)
+    love.graphics.setColor(1,1,1,1) 
+    if love.keyboard.isDown('a') then
+        love.graphics.setColor(1,0,0,1) 
+    end
     love.graphics.print("←[A]",10,50)
-    love.graphics.print("→[D]",100,50)
+    love.graphics.setColor(1,1,1,1) 
+    if love.keyboard.isDown('d') then
+        love.graphics.setColor(1,0,0,1) 
+    end
+    love.graphics.print("→[D]",150,50)
+    love.graphics.setColor(1,1,1,1) 
     
     
 

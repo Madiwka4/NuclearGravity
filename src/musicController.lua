@@ -1,19 +1,25 @@
 sounds = {
-    ["menu"] = love.audio.newSource("entities/music/menu.ogg", "static"),
     ["boom"] = love.audio.newSource("entities/planet/boom.wav", "static"),
     ["close"] = love.audio.newSource("entities/planet/close.wav", "static"),
-    ["play"] = love.audio.newSource("entities/music/play.wav", "static"),
     ["appear"] = love.audio.newSource("entities/ship/Appear.wav", "static"),
     ["finish"] = love.audio.newSource("entities/ship/Finish.wav", "static")
 }
+music = {
+    ["menu"] = love.audio.newSource("entities/music/menu.ogg", "static"),
+    ["play"] = love.audio.newSource("entities/music/play.wav", "static")
+}
 mute = false
 function musicController(orders, toggling)
-    if (orders == 'norm' and not mute) then 
+    if (orders == 'norm' and not mute and not reachedGoal) then 
         if (gameState == 'menu' or gameState == "selectlv") then 
-            sounds['menu']:play()
+            music['menu']:play()
+            music["play"]:play()
+            music["play"]:setVolume(0)
+            music["menu"]:setVolume(1)
         elseif gameStatus == 'play' then 
-            stopSounds()
-            sounds["play"]:play()
+            music["play"]:play()
+            music["play"]:setVolume(0.4)
+            music["menu"]:setVolume(1)
         end
     elseif orders == "mute" then 
         if toggling == 1 then 
@@ -32,4 +38,8 @@ function stopSounds()
         sound[i]:stop()
         print("stopping sounds")
     end
+end 
+function stopMusic()
+    music["play"]:setVolume(0)
+    music["menu"]:setVolume(0)
 end 

@@ -31,6 +31,9 @@ function love.load()
     else
         --print("No save file found!")
     end 
+    if saveData.score == nil then 
+        saveData.score = 0 
+    end
     tick.framerate = 60
     camera = Camera()
     BG = love.graphics.newImage("entities/background.jpg")

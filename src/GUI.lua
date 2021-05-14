@@ -1,7 +1,5 @@
 selectedItem = "none"
 local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
-
-
 function GUIDraw(mode)
     --MAIN
     love.graphics.setColor(1,1,1,1)
@@ -23,9 +21,11 @@ function GUIDraw(mode)
     --SHIP
     --PLANET
     GUIButton(planetsleft, planetImage, menuX + 60, menuY+WINDOW_HEIGHT*0.4, function() selectedItem = "planet" end, 0.5, 0.5, {1,1,1,1}, 1.57)
-    
+    for i, explosion in ipairs(explosions) do 
+        explosion:render("special")
+        --print("exploding")
+    end
     --PLANET
-
 
     --PLACING
     local mx, my = love.mouse.getPosition()
@@ -35,6 +35,8 @@ function GUIDraw(mode)
     local mx = mx * DIFFERENCE_X
     local my = my * DIFFERENCE_Y
     local vmx, vmy = camera:toWorldCoords(mx, my)
+    
+    firstShip.x = firstShip.x + (math.abs(firstShip.destX-firstShip.x)/5)
     if mode == "anywhere" then 
         love.graphics.setColor(1,1,1,0.5)
         if selectedItem == "ship" and mx < menuX then 
@@ -43,8 +45,14 @@ function GUIDraw(mode)
             love.graphics.draw(shipImage,mx,my, 1.5708, 1, 1, shipW/2, shipH/2)
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
-                firstShip.x = vmx 
+                if #explosions == 0 then 
+                    table.insert(explosions, explosion(0, my, 100, {1,1,1,1}))
+                    explosions[1].type = 1
+                end 
+
+                firstShip.destX = vmx
                 firstShip.y = vmy
+                
                 sounds["appear"]:play()
                 shipsleft = shipsleft - 1
             end
@@ -67,7 +75,12 @@ function GUIDraw(mode)
             end
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
-                firstShip.x = 250
+                if #explosions == 0 then 
+                    table.insert(explosions, explosion(0, my, 100, {1,1,1,1}))
+                    explosions[1].type = 1
+                end 
+                sounds["appear"]:play()
+                firstShip.destX = 250
                 firstShip.y = vmy
                 shipsleft = shipsleft - 1
             end
@@ -90,7 +103,12 @@ function GUIDraw(mode)
             end
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
-                firstShip.x = vmx
+                if #explosions == 0 then 
+                    table.insert(explosions, explosion(0, 100, 100, {1,1,1,1}))
+                    explosions[1].type = 1
+                end 
+                sounds["appear"]:play()
+                firstShip.destX = vmx
                 firstShip.y = 100
                 shipsleft = shipsleft - 1
             end
@@ -187,6 +205,7 @@ function GUIDraw(mode)
             if pressed and hot then
                 love.keyboard.mouseisReleased = false 
                 firstShip.x = -9000
+                firstShip.destX = -9000
                 shipsleft = shipsleft + 1 
             end
 

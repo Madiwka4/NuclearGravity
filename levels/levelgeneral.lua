@@ -22,6 +22,7 @@ function levelgeneral.update(dt)
         end
         --print("saveData.levelsBeaten is " .. saveData.levelsBeaten)
         if animationComplete then 
+            reachedGoal = false
         love.filesystem.write("save", serialize(saveData))
         levelgeneral.goBack()
         end 
@@ -35,8 +36,10 @@ function levelgeneral.update(dt)
         explosion:update(dt)
         if explosion.killed then 
             table.remove(explosions, i)
+            if shipIsHit then 
             gameStatus = "setup"
             levelgeneral.reset()
+            end
         end
     end
     if gameStatus == "play" then
@@ -82,6 +85,7 @@ function levelgeneral.draw()
         love.graphics.clear(0,0,0,1)
         love.graphics.setColor(30/255, 30/255, 30/255, 1)
         if frame < WINDOW_WIDTH then 
+        stopMusic()
         sounds["finish"]:play()
         love.graphics.circle("fill", firstShip.x, firstShip.y, WINDOW_WIDTH - frame)
         end 
