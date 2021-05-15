@@ -1,5 +1,6 @@
 selectedItem = "none"
 local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
+local cannonImage = love.graphics.newImage("entities/enemy/enemy.png")
 function GUIDraw(mode)
     --MAIN
     love.graphics.setColor(1,1,1,1)
@@ -20,12 +21,16 @@ function GUIDraw(mode)
     GUIButton(shipsleft, shipImage, menuX + 60, menuY+WINDOW_HEIGHT*0.2, function() selectedItem = "ship" end, 1, 1, {1,1,1,1}, 1.57)
     --SHIP
     --PLANET
-    GUIButton(planetsleft, planetImage, menuX + 60, menuY+WINDOW_HEIGHT*0.4, function() selectedItem = "planet" end, 0.5, 0.5, {1,1,1,1}, 1.57)
-    for i, explosion in ipairs(explosions) do 
-        explosion:render("special")
-        --print("exploding")
-    end
+    if gameState == "practice" then 
+    GUIButton(cannonsleft, cannonImage, menuX + 240, menuY+WINDOW_HEIGHT*0.4, function() selectedItem = "cannon" end, 1, 1, {1,1,1,1}, 0)
+    end 
+
     --PLANET
+
+    --CANNON
+    GUIButton(planetsleft, planetImage, menuX + 60, menuY+WINDOW_HEIGHT*0.4, function() selectedItem = "planet" end, 0.5, 0.5, {1,1,1,1}, 1.57)
+    --CANNON
+
 
     --PLACING
     local mx, my = love.mouse.getPosition()
@@ -182,10 +187,27 @@ function GUIDraw(mode)
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
                 table.insert(planets, planet(vmx, vmy, 100000000, 0.3, planetImage))
+                sounds["planet"]:stop()
+                sounds["planet"]:play()
                 planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
                 planetsleft = planetsleft-1
             end
             if planetsleft == 0 then 
+                selectedItem = "none"
+            end
+        end
+        if selectedItem == "cannon" and mx < menuX then 
+            local shipW = cannonImage:getWidth()
+            local shipH = cannonImage:getHeight()
+            love.graphics.draw(cannonImage,mx,my,0, 1, 1, shipW/2, shipH/2)
+            if love.keyboard.mouseisReleased  then 
+                love.keyboard.mouseisReleased = false 
+                table.insert(cannons, enemy(vmx, vmy, true, love.math.random(1,3)))
+                sounds["planet"]:stop()
+                sounds["planet"]:play()
+                cannonsleft = cannonsleft - 1
+            end
+            if cannonsleft == 0 then 
                 selectedItem = "none"
             end
         end
@@ -232,6 +254,28 @@ function GUIDraw(mode)
                     end
                 end
             end
+            for j in ipairs(cannons) do 
+                if cannons[j].deletable then 
+                    local hot = (vmx > cannons[j].x-cannons[j].w*0.3/2 and vmx < cannons[j].x+cannons[j].w*0.3 and vmy > cannons[j].y-cannons[j].w*0.3/2 and vmy < cannons[j].y + cannons[j].w*0.3)
+                    if hot then 
+                        cannons[j].color = {1,0,0,1}
+                        --print("hot")
+                    else 
+                        cannons[j].color = {1,1,1,1}
+                        --print(mx .. " " .. my .. " " .. firstShip.x .. " " .. firstShip.y .. " " .. firstShip.width .. firstShip.height)
+                    end
+                    local pressed = love.keyboard.mouseisReleased
+                    if location == "android" then 
+                        pressed = love.mouse.isDown(1)
+                    end
+                    if pressed and hot then
+                        love.keyboard.mouseisReleased = false 
+                        table.remove(cannons, j)
+                        cannonsleft = cannonsleft + 1
+                        break
+                    end
+                end
+            end
         end
     --PLACING
 
@@ -239,6 +283,9 @@ function GUIDraw(mode)
     --REMOVE TOOL
     trashbin = love.graphics.newImage("entities/trashbin.png")
     GUIButton("inf", trashbin, menuX + 60, menuY+WINDOW_HEIGHT*0.6, function() selectedItem = "eraser" end, 1, 1, {1,1,1,1}, 0)
+    GUIButton("clr", trashbin, menuX + 240, menuY+WINDOW_HEIGHT*0.6, function() for i in ipairs(planets) do if planets[i].deletable then planetsleft = planetsleft + 1 planets[i] = nil end end for i in ipairs(cannons) do if cannons[i].deletable then cannonsleft = cannonsleft + 1 cannons[i] = nil end end                firstShip.x = -9000
+    firstShip.destX = -9000
+    shipsleft = 1  end, 1, 1, {0,0,1,1}, 0)
     --REMOVE TOOL
 
     --START BUTTON

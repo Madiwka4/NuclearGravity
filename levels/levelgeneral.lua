@@ -56,6 +56,9 @@ function levelgeneral.update(dt)
     for i in ipairs(planets) do 
         planets[i]:update(dt)
     end
+    if currentLevel > 5 then 
+        level.bonusUpdate(dt)
+    end
 else 
     camera:follow(VCAM.x, VCAM.y)
 end
@@ -75,12 +78,22 @@ function levelgeneral.draw()
         planets[i]:draw(dt)
     end
     --love.graphics.rectangle("fill",VCAM.x,VCAM.y,30,30)
-    if shipIsHit then 
-        for i, explosion in ipairs(explosions) do 
-            explosion:render()
-            --print("exploding")
-        end
+    for i in ipairs(cannons) do 
+        cannons[i]:draw(dt)
     end
+    for i in ipairs(projectiles) do 
+        projectiles[i]:draw(dt)
+    end
+
+    for i, explosion in ipairs(explosions) do 
+        if shipIsHit then 
+            explosion:render()
+        else 
+            explosion:render("special")
+        end
+        --print("exploding")
+    end
+
     if reachedGoal then 
         love.graphics.clear(0,0,0,1)
         love.graphics.setColor(30/255, 30/255, 30/255, 1)
@@ -92,6 +105,7 @@ function levelgeneral.draw()
         frame = frame + 20
     end 
         firstShip:draw()
+
     camera:detach()
     
     camera:draw()

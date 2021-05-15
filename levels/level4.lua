@@ -37,16 +37,10 @@ end
 
 function level4.reset()
     firstShip:reset()
-    for k in pairs(planets) do
-        if planets[k].deletable then 
-        planets[k] = nil
-        end 
-    end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     shipsleft = 1
     firstShip.fuel = 100
     shipIsHit = false
-    planetsleft = 3
 end 
 function level4.GUIControl()
     if (love.keyboard.isDown('a') and VCAM.x > -WINDOW_WIDTH/2) then 

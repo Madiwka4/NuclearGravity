@@ -55,15 +55,11 @@ function level1.hint()
 end 
 function level1.reset()
     firstShip:reset()
-    for k in pairs(planets) do
-        planets[k] = nil
-    end
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     table.insert(planets, planet(700, 200, 50, 0.3, asteroidImage))
     shipsleft = 1
     shipIsHit = false
     firstShip.fuel = 25
-    planetsleft = 3
 end 
 function level1.GUIControl()
     if (love.keyboard.isDown('a') and VCAM.x > WINDOW_WIDTH/2) then 

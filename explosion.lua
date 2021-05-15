@@ -30,7 +30,8 @@ function explosion:render(toggle)
     love.graphics.setColor(unpack(self.color))
     if toggle == "special" then 
         love.graphics.setColor(1,1,1,0.7/(self.range/6))
-        print(self.range)
+       -- print(self.range)
     end
         love.graphics.circle("fill", self.x, self.y, self.range * self.v, 100)
+        love.graphics.setColor(1,1,1,1)
 end

@@ -6,6 +6,7 @@ function practice.update(dt)
     if not levelLoaded then 
         shipsleft = 1
         planetsleft = 10
+        cannonsleft = 10
         gameStatus = "setup"
         playbutts = {}
         guibutts = {}
@@ -60,6 +61,19 @@ function practice.update(dt)
     for i in ipairs(planets) do 
         planets[i]:update(dt)
     end
+    for i in ipairs(cannons) do 
+        cannons[i]:update(dt)
+    end
+    for i in ipairs(projectiles) do 
+        projectiles[i]:update(dt)
+    end
+    for i in ipairs(projectiles) do 
+        if projectiles[i].killed then 
+            table.remove(projectiles, i) 
+            --print("killing")
+        end
+    end
+
     currentScore = currentScore + math.sqrt(firstShip.dx^2 + firstShip.dy^2) 
 else 
     camera:follow(VCAM.x, VCAM.y)
@@ -74,6 +88,12 @@ function practice.draw()
     firstShip:draw()
     for i in ipairs(planets) do 
         planets[i]:draw(dt)
+    end
+    for i in ipairs(cannons) do 
+        cannons[i]:draw(dt)
+    end
+    for i in ipairs(projectiles) do 
+        projectiles[i]:draw(dt)
     end
     --love.graphics.rectangle("fill",VCAM.x,VCAM.y,30,30)
     if shipIsHit then 
@@ -109,12 +129,11 @@ function practice.goBack()
     gameStatus = "setup"
     levelLoaded = false
     gameState = "menu"
+    cannons = {}
 end 
 function practice.reset()
     firstShip:reset()
-    for k in pairs(planets) do
-        planets[k] = nil
-    end
+    projectiles = {}
     shipsleft = 1
     if currentScore > saveData.score then 
         
@@ -123,7 +142,6 @@ function practice.reset()
     end
     currentScore = 0
     shipIsHit = false
-    planetsleft = 10
     firstShip.fuel = 99999
 end 
 function practice.GUIControl()

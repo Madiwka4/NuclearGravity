@@ -8,9 +8,9 @@ function menu.update(dt)
         planets = {}
         table.insert(planets, planet(love.math.random(100, WINDOW_WIDTH-100), love.math.random(100, WINDOW_HEIGHT-100), 90000000, 0.3, love.graphics.newImage("entities/planet/planet.png")))
         if (planets[1].y < WINDOW_HEIGHT/2) then 
-            firstShip.y =  love.math.random(WINDOW_HEIGHT/2, WINDOW_HEIGHT)
+            firstShip.y =  planets[1].y + love.math.random(300, 500)
         else 
-            firstShip.y =  love.math.random(0, WINDOW_HEIGHT/2)
+            firstShip.y =  planets[1].y - love.math.random(300, 500)
         end
     end
     for i in ipairs(planets) do 

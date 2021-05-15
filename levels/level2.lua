@@ -35,15 +35,11 @@ function level2.load()
 end 
 function level2.reset()
     firstShip:reset()
-    for k in pairs(planets) do
-        planets[k] = nil
-    end
     firstShip.fuel = 50
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     table.insert(planets, planet(700, 500, 50, 0.3, asteroidImage))
     shipsleft = 1
     shipIsHit = false
-    planetsleft = 3
 end 
 function level2.hint()
     GUIDraw("left")
@@ -57,7 +53,7 @@ function level2.hint()
     love.graphics.setColor(1,1,1,1) 
     end 
     if (VCAM.x < WINDOW_WIDTH*2) then 
-        if love.keyboard.isDown('a') then
+        if love.keyboard.isDown('d') then
             love.graphics.setColor(1,0,0,1) 
         end
     love.graphics.print("[D]→",100,50)

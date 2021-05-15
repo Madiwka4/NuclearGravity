@@ -12,6 +12,8 @@ require 'stateMachine'
 require 'entities/base/base'
 require 'entities/camera/VCAM'
 require 'src/musicController'
+require 'entities/enemy/enemy'
+require 'entities/enemy/projectile'
 tick = require 'src/tick'
 utf8 = require("utf8")
 serialize = require 'src/ser'

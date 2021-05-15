@@ -21,9 +21,16 @@ saveData = {
 
 planets = {}
 buttons = {}
+cannons = {}
+projectiles = {}
 menu = mainMenu()
 
 function love.load()
+    print(love.filesystem.getAppdataDirectory())
+    print(love.filesystem.getSaveDirectory())
+    print(love.filesystem.areSymlinksEnabled())
+    print(love.filesystem.createDirectory('.'))
+    love.filesystem.newFile("File")
     testwalls = love.filesystem.load("save")
     if testwalls ~= nil then
         saveData = love.filesystem.load("save")()
