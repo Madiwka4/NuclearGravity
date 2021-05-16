@@ -1,15 +1,7 @@
 level7 = Class{}
 local levelLoaded = false
 local M = {}
-function love.wheelmoved(x, y)
-    if gameStatus == "play" then 
-    if y > 0 and camera.scale < 1 then
-        camera.scale = camera.scale + 0.1
-    elseif y < 0 and camera.scale > 0.5 then
-        camera.scale = camera.scale - 0.1
-    end
-end 
-end
+
 function level7.load()
     shipsleft = 1
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
@@ -23,6 +15,7 @@ function level7.load()
     explosions = {}
     shipIsHit = false
     guimenu = mainMenu()
+    cameraControl = true 
     reachedGoal = false
     lvlbase = base(1400, WINDOW_HEIGHT/2)
     levelLoaded = true
@@ -119,7 +112,8 @@ function level7.bonusUpdate(dt)
                 if not cannons[i].appeared then 
                     sounds["appear"]:stop()
                     sounds["appear"]:play() 
-                    table.insert(explosions, explosion(1500, cannons[i].y, 100, {1,1,1,1}, 1))
+                    local coolx, cooly = camera:toWorldCoords(1280, 720)
+                    table.insert(explosions, explosion(coolx, cannons[i].y, 100, {1,1,1,1}, 1))
                     cannons[i].appeared = true  
                 end
             end

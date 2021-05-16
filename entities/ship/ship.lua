@@ -19,6 +19,7 @@ self.vector = 1.5708
 self.color = {1,1,1,1}
 self.path = {}
 self.dottimer = 0.5
+self.exploded = false 
 self.fuel = 0
 self.destX = x
 end 
@@ -147,4 +148,5 @@ function ship:reset()
     self.destX = self.x
     self.path = {}
     self.dottimer = 0.5
+    self.exploded = false
 end 

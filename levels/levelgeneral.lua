@@ -34,9 +34,10 @@ function levelgeneral.update(dt)
     --print(camera.x .. " " .. camera.y)
     for i, explosion in ipairs(explosions) do 
         explosion:update(dt)
+        
         if explosion.killed then 
             table.remove(explosions, i)
-            if shipIsHit then 
+            if shipIsHit and explosion.type == 0 then 
             gameStatus = "setup"
             levelgeneral.reset()
             end
@@ -45,10 +46,9 @@ function levelgeneral.update(dt)
     if gameStatus == "play" then
         camera.x, camera.y = firstShip.x - firstShip.height*4, firstShip.y- firstShip.width
         --print(camera.x .. firstShip.x)
-        if shipIsHit then 
-            if #explosions == 0 then 
-                table.insert(explosions, explosion(firstShip.x, firstShip.y, 100, {1,1,1,1}))
-            end 
+        if shipIsHit and not firstShip.exploded then 
+                table.insert(explosions, explosion(firstShip.x, firstShip.y, 100, {1,1,1,1}, 0))
+                firstShip.exploded = true 
             
         end 
     firstShip:update(dt)
@@ -105,11 +105,7 @@ function levelgeneral.draw()
     end 
         firstShip:draw()
         for i, explosion in ipairs(explosions) do 
-            if shipIsHit then 
                 explosion:render()
-            else 
-                explosion:render("special")
-            end
             --print("exploding")
         end
     camera:detach()
@@ -145,6 +141,7 @@ function levelgeneral.goBack()
     levelgeneral.reset()
     lvlbase = nil
     gameStatus = "setup"
+    cameraControl = false
     firstShip.path = {}
     cannons = {}
     levelLoaded = false

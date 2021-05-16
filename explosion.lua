@@ -7,6 +7,7 @@ function explosion:init(x, y, v, color, type)
 	self.y = y 
     self.v = v
     self.range = 0  
+    self.maxRange = WINDOW_WIDTH*2
     self.killed = false 
     if type ~= nil then 
         self.type = type 
@@ -16,14 +17,17 @@ end
 
 function explosion:update(dt)
     self.range = self.range + dt * 24 
-    local maxRange = WINDOW_WIDTH*2
-    if self.type == 1 then 
-        maxRange = WINDOW_WIDTH*6
-    elseif self.type == 2 then 
-        maxRange = 200
+    if (self.type == 0) then 
+        --print("my range is " .. self.range)
     end
-    if self.range * self.v > maxRange then 
-        --print("killing myself with range" .. self.range)
+    self.maxRange = WINDOW_WIDTH*2
+    if self.type == 1 then 
+        self.maxRange = WINDOW_WIDTH*6
+    elseif self.type == 2 then 
+        self.maxRange = 200
+    end
+    if self.range * self.v > self.maxRange then 
+        --print("killing myself with range" .. self.range .. " " .. self.v .. " " .. self.maxRange .. " and type " .. self.type)
         self.killed = true
     end
 end
@@ -36,7 +40,7 @@ function explosion:render(toggle)
     if self.type == 2 then 
         love.graphics.setColor(1,1,1,0.7/(self.range))
        -- print(self.range)
-    elseif toggle == "special" then 
+    elseif self.type == 1 then 
         love.graphics.setColor(1,1,1,0.7/(self.range/6))
        -- print(self.range)
     end

@@ -50,11 +50,9 @@ function GUIDraw(mode)
             love.graphics.draw(shipImage,mx,my, 1.5708, 1, 1, shipW/2, shipH/2)
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
-                if #explosions == 0 then 
                     local zerox, zeroy = camera:toWorldCoords(0, 0)
                     table.insert(explosions, explosion(zerox, my, 100, {1,1,1,1}))
-                    explosions[1].type = 1
-                end 
+                    explosions[#explosions].type = 1
 
                 firstShip.destX = vmx
                 firstShip.y = vmy
@@ -84,8 +82,8 @@ function GUIDraw(mode)
                 if #explosions == 0 then 
                     local zerox, zeroy = camera:toWorldCoords(0, 0)
                     table.insert(explosions, explosion(zerox, my, 100, {1,1,1,1}))
-                    explosions[1].type = 1
-                end 
+                    explosions[#explosions].type = 1
+                end
                 
                 sounds["appear"]:play()
                 firstShip.destX = 250
@@ -111,10 +109,8 @@ function GUIDraw(mode)
             end
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
-                if #explosions == 0 then 
                     table.insert(explosions, explosion(0, 100, 100, {1,1,1,1}))
-                    explosions[1].type = 1
-                end 
+                    explosions[#explosions].type = 1
                 sounds["appear"]:play()
                 firstShip.destX = vmx
                 firstShip.y = 100

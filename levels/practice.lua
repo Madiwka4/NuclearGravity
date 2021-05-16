@@ -2,15 +2,7 @@ practice = Class{}
 local levelLoaded = false
 local M = {}
 local currenctScore = 0
-function love.wheelmoved(x, y)
-    if gameStatus == "play" then 
-    if y > 0 and camera.scale < 1 then
-        camera.scale = camera.scale + 0.1
-    elseif y < 0 and camera.scale > 0.5 then
-        camera.scale = camera.scale - 0.1
-    end
-end 
-end
+
 function practice.update(dt)
     if not levelLoaded then 
         shipsleft = 1
@@ -21,6 +13,7 @@ function practice.update(dt)
         guibutts = {}
         XCAM = 0
         currentScore = 0
+        cameraControl = true 
         thrusterMax = 0
         YCAM = 0
         firstShip.fuel = 0
@@ -48,6 +41,7 @@ function practice.update(dt)
     --print(camera.x .. " " .. camera.y)
     for i, explosion in ipairs(explosions) do 
         explosion:update(dt)
+       -- print("1 update done")
         if explosion.killed then 
             table.remove(explosions, i)
             if shipIsHit then 
@@ -59,12 +53,10 @@ function practice.update(dt)
     if gameStatus == "play" then
         camera.x, camera.y = firstShip.x - firstShip.height*4, firstShip.y- firstShip.width
         --print(camera.x .. firstShip.x)
-        if shipIsHit then 
-            if #explosions == 0 then 
-                
-                table.insert(explosions, explosion(firstShip.x, firstShip.y, 100, {1,1,1,1}))
-            end 
-            
+        if shipIsHit and not firstShip.exploded then  
+            table.insert(explosions, explosion(firstShip.x, firstShip.y, 100, {1,1,1,1}))
+            explosions[#explosions].type = 0
+            firstShip.exploded = true            
         end 
     firstShip:update(dt)
     for i in ipairs(planets) do 
@@ -138,6 +130,7 @@ function practice.draw()
 end 
 function practice.goBack()
     practice.reset()
+    cameraControl = false
     gameStatus = "setup"
     levelLoaded = false
     gameState = "menu"

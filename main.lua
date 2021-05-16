@@ -11,7 +11,7 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 OFFSET_X = 0
 OFFSET_Y = 0
-
+cameraControl = false
 currentLevel = 0
 
 saveData = {
@@ -24,7 +24,15 @@ buttons = {}
 cannons = {}
 projectiles = {}
 menu = mainMenu()
-
+function love.wheelmoved(x, y)
+    if gameStatus == "play" and cameraControl then 
+    if y > 0 and camera.scale < 1 then
+        camera.scale = camera.scale + 0.1
+    elseif y < 0 and camera.scale > 0.5 then
+        camera.scale = camera.scale - 0.1
+    end
+end 
+end
 function love.load()
     print(love.filesystem.getAppdataDirectory())
     print(love.filesystem.getSaveDirectory())
