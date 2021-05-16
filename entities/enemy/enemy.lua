@@ -2,7 +2,7 @@ enemy = Class{}
 
 G = 6.67e-5
 
-function enemy:init(x, y, del, tm)
+function enemy:init(x, y, del, tm, atm)
 self.x = x 
 self.y = y 
 self.image = love.graphics.newImage("entities/enemy/enemy.png")
@@ -18,9 +18,11 @@ self.destX = x
 self.timer = tm
 self.color = {1,1,1,1}
 self.appeared = false
+self.appeartimer = atm
 end 
 
 function enemy:update(dt)
+    
     self.timer = self.timer - dt 
     if self.timer <= 0 then 
         self.timer = self.maxtimer 
@@ -32,7 +34,9 @@ function enemy:update(dt)
         self.angle = self.angle - 3.14159
     end
 end 
-
+function enemy:time(dt)
+    self.appeartimer = self.appeartimer - dt
+end 
 function enemy:draw()
     love.graphics.setColor(unpack(self.color))
     love.graphics.draw(self.image, self.x, self.y, 0, 1, 1, self.w/2, self.w/2)

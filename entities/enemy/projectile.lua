@@ -30,11 +30,25 @@ function projectile:update(dt)
     self.vy = self.vy + self.dy 
     self.x = self.x + self.vx 
     self.y = self.y + self.vy
-    if distanceToShip < firstShip.width/3 then 
+    if distanceToShip < firstShip.width/2 then 
         shipIsHit = true
         sounds["close"]:stop()
         sounds["boom"]:play()
     end
+    for i in ipairs(planets) do 
+        if planets[i].deletable == false then 
+            distanceToShip = math.sqrt((planets[i].x - self.x)^2 + (planets[i].y - self.y)^2)
+            if distanceToShip < planets[i].w/4 then 
+                sounds["boom"]:play()
+                local q = #explosions 
+                table.insert(explosions, explosion(self.x, self.y, 100, {1,1,1,1}))
+                explosions[q+1].type = 2 
+                table.remove(planets, i)
+                self.killed = true
+            end
+        end
+
+    end 
 end 
 
 function projectile:draw()

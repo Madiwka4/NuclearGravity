@@ -37,7 +37,7 @@ function planet:update(dt)
     love.window.setTitle(self.attractionX)
     firstShip.dx = firstShip.dx + self.attractionX
     firstShip.dy = firstShip.dy + self.attractionY
-    if distanceToShip < self.w/4 then 
+    if distanceToShip < self.w/4 and not reachedGoal then 
         shipIsHit = true
         sounds["close"]:stop()
         sounds["boom"]:play()

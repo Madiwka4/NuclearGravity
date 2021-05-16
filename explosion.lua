@@ -1,6 +1,6 @@
 explosion = Class{}
 
-function explosion:init(x, y, v, color)
+function explosion:init(x, y, v, color, type)
 	self.color = color 
     self.type = 0
 	self.x = x 
@@ -8,13 +8,16 @@ function explosion:init(x, y, v, color)
     self.v = v
     self.range = 0  
     self.killed = false 
+    if type ~= nil then 
+        self.type = type 
+    end
     --print(self.i)
 end
 
 function explosion:update(dt)
     self.range = self.range + dt * 24 
     local maxRange = WINDOW_WIDTH*2
-    if self.type == 1 then 
+    if self.type >= 1 then 
         maxRange = WINDOW_WIDTH*6
     end
     if self.range * self.v > maxRange then 

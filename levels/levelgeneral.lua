@@ -85,27 +85,33 @@ function levelgeneral.draw()
         projectiles[i]:draw(dt)
     end
 
-    for i, explosion in ipairs(explosions) do 
-        if shipIsHit then 
-            explosion:render()
-        else 
-            explosion:render("special")
-        end
-        --print("exploding")
-    end
+
 
     if reachedGoal then 
+        if frame <= WINDOW_WIDTH*1.1 then 
+            stopMusic()
+            sounds["finish"]:play()
+        love.graphics.setColor(1,1,1,1)
+        love.graphics.circle("fill", firstShip.x, firstShip.y, frame)
+        end
+        if frame > WINDOW_WIDTH*1.1 then 
         love.graphics.clear(0,0,0,1)
-        love.graphics.setColor(30/255, 30/255, 30/255, 1)
-        if frame < WINDOW_WIDTH then 
-        stopMusic()
-        sounds["finish"]:play()
-        love.graphics.circle("fill", firstShip.x, firstShip.y, WINDOW_WIDTH - frame)
+        love.graphics.setColor(1, 1, 1, 1)
+        if frame-WINDOW_WIDTH*1.1 < WINDOW_WIDTH then 
+        love.graphics.circle("fill", firstShip.x, firstShip.y, WINDOW_WIDTH - (frame - WINDOW_WIDTH*1.1))
         end 
-        frame = frame + 20
+        end 
+        frame = frame + 40
     end 
         firstShip:draw()
-
+        for i, explosion in ipairs(explosions) do 
+            if shipIsHit then 
+                explosion:render()
+            else 
+                explosion:render("special")
+            end
+            --print("exploding")
+        end
     camera:detach()
     
     camera:draw()
@@ -140,6 +146,7 @@ function levelgeneral.goBack()
     lvlbase = nil
     gameStatus = "setup"
     firstShip.path = {}
+    cannons = {}
     levelLoaded = false
     for k in pairs(planets) do
         planets[k] = nil

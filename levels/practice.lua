@@ -2,6 +2,15 @@ practice = Class{}
 local levelLoaded = false
 local M = {}
 local currenctScore = 0
+function love.wheelmoved(x, y)
+    if gameStatus == "play" then 
+    if y > 0 and camera.scale < 1 then
+        camera.scale = camera.scale + 0.1
+    elseif y < 0 and camera.scale > 0.5 then
+        camera.scale = camera.scale - 0.1
+    end
+end 
+end
 function practice.update(dt)
     if not levelLoaded then 
         shipsleft = 1
@@ -72,9 +81,10 @@ function practice.update(dt)
             table.remove(projectiles, i) 
             --print("killing")
         end
+    end 
+    if math.sqrt(firstShip.dx^2 + firstShip.dy^2) < 40 then 
+    currentScore = currentScore + math.sqrt(firstShip.dx^2 + firstShip.dy^2)
     end
-
-    currentScore = currentScore + math.sqrt(firstShip.dx^2 + firstShip.dy^2) 
 else 
     camera:follow(VCAM.x, VCAM.y)
 end
@@ -96,11 +106,13 @@ function practice.draw()
         projectiles[i]:draw(dt)
     end
     --love.graphics.rectangle("fill",VCAM.x,VCAM.y,30,30)
-    if shipIsHit then 
-        for i, explosion in ipairs(explosions) do 
+    for i, explosion in ipairs(explosions) do 
+        if shipIsHit then 
             explosion:render()
-            --print("exploding")
+        else 
+            explosion:render("special")
         end
+        --print("exploding")
     end
     camera:detach()
     
@@ -133,6 +145,7 @@ function practice.goBack()
 end 
 function practice.reset()
     firstShip:reset()
+    camera.scale = 1
     projectiles = {}
     shipsleft = 1
     if currentScore > saveData.score then 
