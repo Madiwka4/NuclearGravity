@@ -34,14 +34,16 @@ function projectile:update(dt)
         shipIsHit = true
         sounds["close"]:stop()
         sounds["boom"]:play()
+        sounds["boom"]:setVolume(1)
     end
     for i in ipairs(planets) do 
         if planets[i].deletable == false then 
             distanceToShip = math.sqrt((planets[i].x - self.x)^2 + (planets[i].y - self.y)^2)
             if distanceToShip < planets[i].w/4 then 
                 sounds["boom"]:play()
+                sounds["boom"]:setVolume(0.4)
                 local q = #explosions 
-                table.insert(explosions, explosion(self.x, self.y, 100, {1,1,1,1}))
+                table.insert(explosions, explosion(self.x, self.y, 10, {1,1,1,1}))
                 explosions[q+1].type = 2 
                 table.remove(planets, i)
                 self.killed = true

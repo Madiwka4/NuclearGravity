@@ -1,10 +1,10 @@
 sounds = {
     ["boom"] = love.audio.newSource("entities/planet/boom.wav", "static"),
-    ["close"] = love.audio.newSource("entities/planet/close.wav", "static"),
-    ["appear"] = love.audio.newSource("entities/ship/Appear.wav", "static"),
-    ["finish"] = love.audio.newSource("entities/ship/Finish.wav", "static"),
-    ["planet"] = love.audio.newSource("entities/planet/teleport.wav", "static"),
-    ["launch"] = love.audio.newSource("entities/enemy/rlaunch.wav", "static")
+    ["close"] = love.audio.newSource("entities/planet/close.ogg", "static"),
+    ["appear"] = love.audio.newSource("entities/ship/Appear.ogg", "static"),
+    ["finish"] = love.audio.newSource("entities/ship/Finish.ogg", "static"),
+    ["planet"] = love.audio.newSource("entities/planet/teleport.ogg", "static"),
+    ["launch"] = love.audio.newSource("entities/enemy/rlaunch.ogg", "static")
 }
 music = {
     ["menu"] = love.audio.newSource("entities/music/menu.ogg", "static"),
@@ -20,7 +20,12 @@ function musicController(orders, toggling)
             music["menu"]:setVolume(1)
         elseif gameStatus == 'play' then 
             music["play"]:play()
-            music["play"]:setVolume(0.4)
+            music["play"]:setVolume(0.8)
+            music["menu"]:setVolume(0.2)
+        elseif gameStatus == 'setup' then 
+            music['menu']:play()
+            music["play"]:play()
+            music["play"]:setVolume(0.6)
             music["menu"]:setVolume(1)
         end
     elseif orders == "mute" then 

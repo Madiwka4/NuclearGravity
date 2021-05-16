@@ -41,6 +41,7 @@ function planet:update(dt)
         shipIsHit = true
         sounds["close"]:stop()
         sounds["boom"]:play()
+        sounds["boom"]:setVolume(1)
     end
 end
 end 

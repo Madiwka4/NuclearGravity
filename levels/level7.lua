@@ -1,6 +1,15 @@
 level7 = Class{}
 local levelLoaded = false
 local M = {}
+function love.wheelmoved(x, y)
+    if gameStatus == "play" then 
+    if y > 0 and camera.scale < 1 then
+        camera.scale = camera.scale + 0.1
+    elseif y < 0 and camera.scale > 0.5 then
+        camera.scale = camera.scale - 0.1
+    end
+end 
+end
 function level7.load()
     shipsleft = 1
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
@@ -66,6 +75,7 @@ function level7.hint()
 end 
 function level7.reset()
     firstShip:reset()
+    camera.scale = 1
     for i in ipairs(planets) do 
         if not planets[i].deletable then 
             table.remove(planets, i)
