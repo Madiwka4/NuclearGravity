@@ -9,6 +9,7 @@ self.y = y
 self.mass = mass 
 self.attractionX = 0
 self.attractionY = 0
+self.charge = 20
 self.r = radius 
 self.w = img:getWidth()
 self.image = img

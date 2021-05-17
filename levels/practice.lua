@@ -61,6 +61,10 @@ function practice.update(dt)
     firstShip:update(dt)
     for i in ipairs(planets) do 
         planets[i]:update(dt)
+        if math.sqrt((firstShip.x - planets[i].x)^2 + (firstShip.y - planets[i].y)^2) > planets[i].w/3 then 
+            currentScore = currentScore + math.sqrt(planets[i].attractionX^2 + planets[i].attractionY^2)*100
+            print(math.sqrt(planets[i].attractionX^2 + planets[i].attractionY^2))
+        end 
     end
     for i in ipairs(cannons) do 
         cannons[i]:update(dt)
@@ -74,9 +78,7 @@ function practice.update(dt)
             --print("killing")
         end
     end 
-    if math.sqrt(firstShip.dx^2 + firstShip.dy^2) < 40 then 
-    currentScore = currentScore + math.sqrt(firstShip.dx^2 + firstShip.dy^2)
-    end
+    
 else 
     camera:follow(VCAM.x, VCAM.y)
 end
