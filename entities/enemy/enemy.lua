@@ -15,6 +15,7 @@ self.angle = 0
 self.deletable = del 
 self.maxtimer = tm
 self.destX = x
+self.otimer = tm
 self.timer = tm
 self.color = {1,1,1,1}
 self.appeared = false

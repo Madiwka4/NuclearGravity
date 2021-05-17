@@ -66,6 +66,9 @@ function level6.reset()
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
     shipsleft = 1
     projectiles = {}
+    for i in ipairs(cannons) do 
+        cannons[i].timer = cannons[i].otimer
+    end 
     cannons[1].x = 100000
     cannons[1].destX = 100000
     firstShip.fuel = 0

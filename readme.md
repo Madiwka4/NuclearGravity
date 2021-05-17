@@ -15,10 +15,15 @@ Some nice features include:
 
 
 Installation is simple, just download the windows EXE release from the releases tab!
-If you're on linux, then clone the repo, and use debug.sh to launch the game. Linux binary coming soon!
-The prerequisites are **love** and **zip**
+
+If you're on linux, you can clone the repo, or you can download the binary release from the releases tab too!.
+
+The prerequisites for runing the git version are **love** and **zip**
 If you're on arch, install the prerequisites with:
 ``sudo pacman -S love zip
 ``
 
 
+Changelog:
+- Changed practice scoring system
+- Fixed bug with cannon timers not resetting

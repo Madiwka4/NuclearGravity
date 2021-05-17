@@ -74,6 +74,9 @@ function level7.reset()
             table.remove(planets, i)
         end
     end
+    for i in ipairs(cannons) do 
+        cannons[i].timer = cannons[i].otimer
+    end 
     table.insert(planets, planet(1000, -100, 50, 0.3, asteroidImage, "nodelete"))
     table.insert(planets, planet(1000, 0, 50, 0.3, asteroidImage, "nodelete"))
     table.insert(planets, planet(1000, 100, 50, 0.3, asteroidImage, "nodelete"))
