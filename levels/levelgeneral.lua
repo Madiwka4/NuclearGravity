@@ -5,14 +5,7 @@ local thrusterMax = 0
 local animationComplete = false
 local frame = 0
 asteroidImage = love.graphics.newImage("entities/planet/asteroid.png")
-function love.keyreleased(key)
-    if key == "escape" and gameStatus == "play" then
-       if pauseStatus then 
-        pauseStatus = false 
-       else pauseStatus = true 
-       end
-    end
- end
+
 function levelgeneral.update(dt)
     if not pauseStatus then 
     if not levelLoaded then 
@@ -72,6 +65,8 @@ else
     camera:follow(VCAM.x, VCAM.y)
 end
     levelgeneral.GUIControl()
+else 
+    settingsMenuUpdate(dt)
 end
 end 
 
@@ -127,7 +122,7 @@ function levelgeneral.draw()
     end
     if gameStatus == "setup" and not reachedGoal then 
     level.hint()
-    elseif gameStatus == "play" then 
+    elseif gameStatus == "play" and not pauseStatus then 
         if not reachedGoal then 
         love.graphics.printf("[W] Thrusters: ", 0, WINDOW_HEIGHT-100, 300, "center")
         local m = smallfont:getWidth("[W] Thrusters: ")

@@ -24,8 +24,10 @@ If you're on arch, install the prerequisites with:
 ``
 
 
-Changelog:
+Changelog history:
 - Changed practice scoring system
 - Fixed bug with cannon timers not resetting
 - Toggle music button added
 - Added the pause menu
+- Volume slider added
+- Made trail **wider**

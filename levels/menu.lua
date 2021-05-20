@@ -1,8 +1,10 @@
 menu = Class{}
+menuMode = "main"
 local M = {}
 menuLoaded = false 
 function menu.update(dt)
     if not menuLoaded then 
+        
         firstShip.x = -100
         menuLoaded = true
         planets = {}
@@ -31,6 +33,15 @@ function menu.update(dt)
         end
         --print("ship is hit")
     end
+    if menuMode == "settings" then 
+        local mx, my = love.mouse.getPosition()
+        local vmx, vmy = camera:getMousePosition()
+        local vmx = vmx * DIFFERENCE_X
+        local vmy = vmy * DIFFERENCE_Y
+        local mx = mx * DIFFERENCE_X
+        local my = my * DIFFERENCE_Y
+        volumeSlider:update(mx, my)
+    end
 end 
 
 function menu.draw(dt)
@@ -44,7 +55,19 @@ function menu.draw(dt)
     else 
         love.graphics.setFont(titlefont)
     love.graphics.printf("NuclearGravity", 0, 20, WINDOW_WIDTH, "center")
+    if menuMode == "main" then 
     menu:butt(buttons, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 40, WINDOW_WIDTH/3)
+    elseif menuMode == "settings" then 
+        menu:butt(mainsettings, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 40, WINDOW_WIDTH/3)
+        
+        love.graphics.setColor(254, 67, 101)
+        love.graphics.setFont(tinyfont)
+        love.graphics.printf("Sound volume:", 0, WINDOW_HEIGHT/2-140, WINDOW_WIDTH, "center")
+        -- draw slider, set color and line style before calling
+        volumeSlider:draw()
+    else 
+        print("[EE]No menu found! " .. menu.mode)
+    end
     love.keyboard.mouseisReleased = false
     end 
 end 

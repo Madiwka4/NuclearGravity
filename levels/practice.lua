@@ -4,6 +4,7 @@ local M = {}
 local currenctScore = 0
 
 function practice.update(dt)
+    if not pauseStatus then 
     if not levelLoaded then 
         shipsleft = 1
         planetsleft = 10
@@ -38,6 +39,7 @@ function practice.update(dt)
         levelLoaded = true 
     end
     camera:update(dt)
+ 
     --print(camera.x .. " " .. camera.y)
     for i, explosion in ipairs(explosions) do 
         explosion:update(dt)
@@ -63,7 +65,7 @@ function practice.update(dt)
         planets[i]:update(dt)
         if math.sqrt((firstShip.x - planets[i].x)^2 + (firstShip.y - planets[i].y)^2) > planets[i].w/3 then 
             currentScore = currentScore + math.sqrt(planets[i].attractionX^2 + planets[i].attractionY^2)*100
-            print(math.sqrt(planets[i].attractionX^2 + planets[i].attractionY^2))
+            --print(math.sqrt(planets[i].attractionX^2 + planets[i].attractionY^2))
         end 
     end
     for i in ipairs(cannons) do 
@@ -83,8 +85,9 @@ else
     camera:follow(VCAM.x, VCAM.y)
 end
     practice.GUIControl()
-    
-    
+else   
+    settingsMenuUpdate(dt)
+end
 end 
 
 function practice.draw()
@@ -118,15 +121,17 @@ function practice.draw()
     local textW = tinyfont:getWidth("Top score: " .. math.floor(saveData.score/100))
     love.graphics.print("Top score: " .. math.floor(saveData.score/100), WINDOW_WIDTH/2-textW/2, 10)
     practice.hint()
-    elseif gameStatus == "play" then 
+    elseif gameStatus == "play" and not pauseStatus then 
         local textW = tinyfont:getWidth("Score: " .. math.floor(currentScore/100))
         love.graphics.setFont(tinyfont)
         love.graphics.print("Score: " .. math.floor(currentScore/100), WINDOW_WIDTH/2-textW/2, 10)
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
-        love.keyboard.mouseisReleased = false
     end
     
-    
+    if pauseStatus then 
+        drawPauseMenu()
+        love.keyboard.mouseisReleased = false
+    end
     
     
 end 
@@ -142,6 +147,9 @@ function practice.reset()
     firstShip:reset()
     camera.scale = 1
     projectiles = {}
+    for i in ipairs(cannons) do 
+        cannons[i].timer = cannons[i].otimer
+    end 
     shipsleft = 1
     if currentScore > saveData.score then 
         

@@ -9,7 +9,7 @@ function buttonClutter()
     function() 
         gameState = "selectlv"
     end))
-    table.insert(buttons, menu:addButton("Toggle Fullscreen", 
+    table.insert(mainsettings, menu:addButton("Toggle Fullscreen", 
     function() 
         myscreen:toggle(WINDOW_HEIGHT, WINDOW_WIDTH)
                 DIFFERENCE_X = myscreen.c
@@ -17,9 +17,13 @@ function buttonClutter()
                 OFFSET_X = myscreen.e 
                 OFFSET_Y = myscreen.f 
     end))
-    table.insert(buttons, menu:addButton("Toggle Music", 
+    table.insert(mainsettings, menu:addButton("back", 
+    function() 
+        menuMode = "main"
+    end))
+    table.insert(buttons, menu:addButton("Settings", 
 function() 
-    toggleMusic()
+    menuMode = "settings"
 end
 ))
 

@@ -18,7 +18,7 @@ saveData = {
     levelsBeaten = 0,
     score = 0
 }
-
+mainsettings = {}
 planets = {}
 buttons = {}
 cannons = {}
@@ -33,7 +33,17 @@ function love.wheelmoved(x, y)
     end
 end 
 end
+function love.keyreleased(key)
+    if key == "escape" and gameStatus == "play" then
+       if pauseStatus then 
+        pauseStatus = false 
+        pauseState = "main"
+       else pauseStatus = true 
+       end
+    end
+ end
 function love.load()
+    love.graphics.setLineWidth(4)
     print(love.filesystem.getAppdataDirectory())
     print(love.filesystem.getSaveDirectory())
     print(love.filesystem.areSymlinksEnabled())
