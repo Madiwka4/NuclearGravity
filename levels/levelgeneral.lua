@@ -5,7 +5,16 @@ local thrusterMax = 0
 local animationComplete = false
 local frame = 0
 asteroidImage = love.graphics.newImage("entities/planet/asteroid.png")
+function love.keyreleased(key)
+    if key == "escape" and gameStatus == "play" then
+       if pauseStatus then 
+        pauseStatus = false 
+       else pauseStatus = true 
+       end
+    end
+ end
 function levelgeneral.update(dt)
+    if not pauseStatus then 
     if not levelLoaded then 
         level = require("levels/level" .. currentLevel)
         level.load()
@@ -63,7 +72,7 @@ else
     camera:follow(VCAM.x, VCAM.y)
 end
     levelgeneral.GUIControl()
-    
+end
 end 
 
 function levelgeneral.draw()
@@ -129,10 +138,12 @@ function levelgeneral.draw()
         love.graphics.rectangle("fill",0, WINDOW_HEIGHT-50, firstShip.fuel/2, n)
         love.graphics.setColor(1,1,1,1)
         guimenu:butt(playbutts, WINDOW_WIDTH, WINDOW_HEIGHT, 1100, WINDOW_HEIGHT-50, 40, WINDOW_WIDTH/3)
-        love.keyboard.mouseisReleased = false
         end 
     end
-    
+    if pauseStatus then 
+        drawPauseMenu()
+        love.keyboard.mouseisReleased = false
+    end
     
     
     

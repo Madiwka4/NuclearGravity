@@ -39,6 +39,7 @@ function love.load()
     print(love.filesystem.areSymlinksEnabled())
     print(love.filesystem.createDirectory('.'))
     love.filesystem.newFile("File")
+    pauseMake()
     testwalls = love.filesystem.load("save")
     if testwalls ~= nil then
         saveData = love.filesystem.load("save")()

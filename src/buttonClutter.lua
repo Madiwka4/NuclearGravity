@@ -16,8 +16,13 @@ function buttonClutter()
                 DIFFERENCE_Y = myscreen.d
                 OFFSET_X = myscreen.e 
                 OFFSET_Y = myscreen.f 
-    end
+    end))
+    table.insert(buttons, menu:addButton("Toggle Music", 
+function() 
+    toggleMusic()
+end
 ))
+
 table.insert(buttons, menu:addButton("Quit", 
 function() 
     love.event.quit()

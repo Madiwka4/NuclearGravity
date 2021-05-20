@@ -27,3 +27,5 @@ If you're on arch, install the prerequisites with:
 Changelog:
 - Changed practice scoring system
 - Fixed bug with cannon timers not resetting
+- Toggle music button added
+- Added the pause menu
