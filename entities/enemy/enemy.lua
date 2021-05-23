@@ -2,7 +2,7 @@ enemy = Class{}
 
 G = 6.67e-5
 
-function enemy:init(x, y, del, tm, atm)
+function enemy:init(x, y, del, tm, atm, adst)
 self.x = x 
 self.y = y 
 self.image = love.graphics.newImage("entities/enemy/enemy.png")
@@ -19,6 +19,7 @@ self.otimer = tm
 self.timer = tm
 self.color = {1,1,1,1}
 self.appeared = false
+self.actualdest = adst
 self.appeartimer = atm
 end 
 
