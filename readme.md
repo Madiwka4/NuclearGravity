@@ -31,3 +31,4 @@ Changelog history:
 - Added the pause menu
 - Volume slider added
 - Made trail **wider**
+- Added level 8
