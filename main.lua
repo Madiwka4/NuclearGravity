@@ -2,6 +2,8 @@ gameState = "menu"
 animationSecsLeft = 3
 require 'src/dependencies'
 math.randomseed(os.time())
+local discordRPC = require("src/discordRPC")
+local appId = "889428447972175933"
 --VARIABLES
 RESOLUTION_SET = 0
 isFullscreen = 0
@@ -44,11 +46,6 @@ function love.keyreleased(key)
  end
 function love.load()
     love.graphics.setLineWidth(4)
-    print(love.filesystem.getAppdataDirectory())
-    print(love.filesystem.getSaveDirectory())
-    print(love.filesystem.areSymlinksEnabled())
-    print(love.filesystem.createDirectory('.'))
-    love.filesystem.newFile("File")
     pauseMake()
     testwalls = love.filesystem.load("save")
     if testwalls ~= nil then
@@ -60,6 +57,16 @@ function love.load()
     if saveData.score == nil then 
         saveData.score = 0 
     end
+    discordRPC.initialize(appId, true)
+    local now = os.time(os.date("*t"))
+    presence = {
+        state = "Having a good time",
+        details = "Main Menu",
+        largeImageKey = "gravitynew",
+        largeImageText = "Gravity",
+    }
+
+    nextPresenceUpdate = 0
     tick.framerate = 60
     camera = Camera()
     BG = love.graphics.newImage("entities/background.jpg")
@@ -78,6 +85,12 @@ end
 
 function love.update(dt)
     stateUpdate(dt)
+    if nextPresenceUpdate < love.timer.getTime() then
+        
+        discordRPC.updatePresence(presence)
+        nextPresenceUpdate = love.timer.getTime() + 2.0
+    end
+    discordRPC.runCallbacks()
 love.window.setTitle("Nuclear Gravity")
 end 
 

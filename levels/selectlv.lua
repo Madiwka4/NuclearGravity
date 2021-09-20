@@ -70,6 +70,7 @@ table.insert(levels, menu:addButton("Go Back", function ()
 local M = {}
 function selectlv.update(dt)
     if not menuLoaded then 
+        startTime = os.time(os.date("*t"))
         firstShip.x = -100
         menuLoaded = true
         table.insert(planets, planet(love.math.random(100, WINDOW_WIDTH-100), love.math.random(100, WINDOW_HEIGHT-100), 90000000, 0.3, love.graphics.newImage("entities/planet/planet.png")))

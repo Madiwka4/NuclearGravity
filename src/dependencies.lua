@@ -16,6 +16,7 @@ require 'entities/camera/VCAM'
 require 'src/musicController'
 require 'entities/enemy/enemy'
 require 'entities/enemy/projectile'
+require 'src/rpcManager'
 tick = require 'src/tick'
 utf8 = require("utf8")
 serialize = require 'src/ser'

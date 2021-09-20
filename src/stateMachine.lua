@@ -4,6 +4,7 @@ function stateUpdate(dt)
     state = require("levels/"..gameState)
     state.update(dt)
     musicController("norm")
+    rpcManager()
 end 
 
 function goBack()

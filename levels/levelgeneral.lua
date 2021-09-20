@@ -10,6 +10,7 @@ function levelgeneral.update(dt)
     if not pauseStatus then 
     if not levelLoaded then 
         level = require("levels/level" .. currentLevel)
+        startTime = os.time(os.date("*t"))
         level.load()
         frame = 0
         animationComplete = false

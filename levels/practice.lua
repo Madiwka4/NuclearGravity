@@ -6,6 +6,7 @@ local currenctScore = 0
 function practice.update(dt)
     if not pauseStatus then 
     if not levelLoaded then 
+        startTime = os.time(os.date("*t"))
         shipsleft = 1
         planetsleft = 10
         cannonsleft = 10

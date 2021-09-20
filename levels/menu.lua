@@ -4,7 +4,7 @@ local M = {}
 menuLoaded = false 
 function menu.update(dt)
     if not menuLoaded then 
-        
+        startTime = os.time(os.date("*t"))
         firstShip.x = -100
         menuLoaded = true
         planets = {}
