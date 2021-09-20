@@ -9,6 +9,7 @@ function level5.load()
     playbutts = {}
     guibutts = {}
     thrusterMax = 100
+    cameraControl = true 
     firstShip.fuel = 100
     VCAM.x, VCAM.y = 0, WINDOW_HEIGHT/2
     explosions = {}
@@ -31,8 +32,8 @@ function level5.load()
     table.insert(guibutts, menu:addButton("To menu", function ()
         levelgeneral.goBack()
     end)) 
-    table.insert(planets, planet(0, 2000, 50, 0.3, asteroidImage, "nodelete"))
-    table.insert(planets, planet(100, 2000, 50, 0.3, asteroidImage, "nodelete"))
+    table.insert(planets, planet(-100, 2000, 50, 0.3, asteroidImage, "nodelete"))
+    table.insert(planets, planet(200, 2000, 50, 0.3, asteroidImage, "nodelete"))
     table.insert(planets, planet(50, 1700, 50, 0.3, asteroidImage, "nodelete"))
 end 
 
