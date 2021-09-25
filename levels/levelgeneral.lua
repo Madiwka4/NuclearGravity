@@ -158,6 +158,7 @@ function levelgeneral.goBack()
     gameState = "selectlv"
 end 
 function levelgeneral.reset()
+    camera.scale = 1
     level.reset()
 end 
 function levelgeneral.GUIControl()
