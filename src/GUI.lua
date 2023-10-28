@@ -185,6 +185,7 @@ function GUIDraw(mode)
             love.graphics.draw(planetImage,mx,my,0, 0.3, 0.3, shipW/2, shipH/2)
             if love.keyboard.mouseisReleased  then 
                 love.keyboard.mouseisReleased = false 
+                print("placing planet" .. #planets)
                 table.insert(planets, planet(vmx, vmy, 100000000, 0.3, planetImage))
                 sounds["planet"]:stop()
                 sounds["planet"]:play()
@@ -247,6 +248,8 @@ function GUIDraw(mode)
                     end
                     if pressed and hot then
                         love.keyboard.mouseisReleased = false 
+                        pressed = false 
+                        print("removing planet" .. j .. "Planets left " .. #planets)
                         table.remove(planets, j)
                         planetsleft = planetsleft + 1
                         break
@@ -281,7 +284,11 @@ function GUIDraw(mode)
 
     --REMOVE TOOL
     trashbin = love.graphics.newImage("entities/trashbin.png")
+    if selectedItem ~= "eraser" then 
     GUIButton("inf", trashbin, menuX + 60, menuY+WINDOW_HEIGHT*0.6, function() selectedItem = "eraser" end, 1, 1, {1,1,1,1}, 0)
+    else 
+        GUIButton("inf", trashbin, menuX + 60, menuY+WINDOW_HEIGHT*0.6, function() selectedItem = "none" end, 1, 1, {1,0,0,1}, 0)
+    end
     GUIButton("clr", trashbin, menuX + 240, menuY+WINDOW_HEIGHT*0.6, function() for i in ipairs(planets) do if planets[i].deletable then planetsleft = planetsleft + 1 planets[i] = nil end end for i in ipairs(cannons) do if cannons[i].deletable then cannonsleft = cannonsleft + 1 cannons[i] = nil end end                firstShip.x = -9000
     firstShip.destX = -9000
     shipsleft = 1  end, 1, 1, {0,0,1,1}, 0)

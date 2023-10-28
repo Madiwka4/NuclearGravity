@@ -98,6 +98,7 @@ function love.draw()
     simpleScale.set() 
     love.graphics.clear(30 / 255,30 / 255,30 / 255,1)
     stateDraw()
+    showFPS()
     simpleScale.unSet()
 end 
 
@@ -111,4 +112,10 @@ end
 function objReset()
     firstShip:reset()
     planets = {}
+end
+
+function showFPS()
+    love.graphics.setFont(smallfont)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 end

@@ -1,7 +1,12 @@
 state = require("levels/"..gameState)
+loadedState = gameState
 print("levels/"..gameState)
 function stateUpdate(dt)
-    state = require("levels/"..gameState)
+    if gameState ~= loadedState then 
+        state = require("levels/"..gameState)
+        loadedState = gameState
+        print("levels/"..gameState)
+    end
     state.update(dt)
     musicController("norm")
     rpcManager()

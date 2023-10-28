@@ -56,7 +56,6 @@ end
 function level1.reset()
     firstShip:reset()
     local planetImage = love.graphics.newImage("entities/planet/planet" .. math.random(1, 18) .. ".png")
-    table.insert(planets, planet(700, 200, 50, 0.3, asteroidImage))
     shipsleft = 1
     shipIsHit = false
     firstShip.fuel = 25

@@ -12,6 +12,7 @@ self.attractionY = 0
 self.charge = 20
 self.r = radius 
 self.w = img:getWidth()
+self.removed = false 
 self.image = img
 self.angle = 0
 self.color = {1,1,1,1}
